@@ -77,9 +77,9 @@
   <body class="bg-page text-ink antialiased">
     <main
       x-data="dollarTable"
-      class="mx-auto max-w-[860px] px-4 py-6 sm:px-7 sm:py-8"
+      class="mx-auto flex h-dvh max-w-[860px] flex-col overflow-hidden px-4 py-4 sm:px-7 sm:py-6"
     >
-      <header class="mb-5 flex items-center justify-between gap-4">
+      <header class="mb-5 flex shrink-0 items-center justify-between gap-4">
         <h1 class="text-lg font-semibold sm:text-2xl">
           <a
             href="./"
@@ -135,15 +135,19 @@
         </nav>
       </header>
       <p
-        class="mb-3 text-[11px] text-muted"
+        class="mb-3 shrink-0 text-[11px] text-muted"
         x-show="data"
         x-text="data?t.coverage+' '+formatDate(data.latestDate):''"
       ></p>
-      <div class="overflow-hidden rounded-xl border border-line bg-surface">
+      <div
+        class="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain rounded-xl border border-line bg-surface"
+        tabindex="0"
+        :aria-label="lang==='fa'?'جدول قیمت سالانه دلار':'Yearly dollar prices table'"
+      >
         <table
           class="w-full table-fixed border-collapse text-start text-xs sm:text-sm"
         >
-          <thead class="bg-tint text-muted">
+          <thead class="sticky top-0 z-10 bg-tint text-muted">
             <tr>
               <template x-for="column in columns" :key="column.key"
                 ><th
@@ -237,7 +241,7 @@
         ></p>
       </div>
       <footer
-        class="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-4 text-[11px] text-muted"
+        class="mt-4 flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-3 text-[11px] text-muted"
       >
         <span x-text="t.source"></span
         ><a
