@@ -17,6 +17,8 @@ const translations = {
     conversion: "ارزش دلاری",
     amount: "مبلغ به دلار",
     coverage: "آخرین داده:",
+    daysAgo: "روز پیش",
+    dayAgo: "روز پیش",
     source: "منبع داده:",
     createdWith: "ساخته شده با علاقه و درد توسط",
     createdWhen: "در یک بعدازظهر مهر ۱۴۰۵",
@@ -57,6 +59,8 @@ const translations = {
     conversion: "Dollar value",
     amount: "Amount in dollars",
     coverage: "Latest observation:",
+    daysAgo: "days ago",
+    dayAgo: "day ago",
     source: "Data sources:",
     createdWith: "Made with passion and pain by",
     createdWhen: "on an afternoon in Mehr 1405",
@@ -117,6 +121,7 @@ document.addEventListener("alpine:init", () =>
     dollarAmount: 100,
     governmentYear: null,
     selectedGovernmentPerson: null,
+    currentDate: new Date(),
     sortKey: sortableColumns.includes(initialSort) ? initialSort : "year",
     ascending: sortParameters.get("order") === "asc",
     columns: [
@@ -164,6 +169,7 @@ document.addEventListener("alpine:init", () =>
       } catch {
         this.error = !this.data;
       } finally {
+        this.currentDate = new Date();
         this.loading = false;
         this.refreshing = false;
       }
@@ -338,6 +344,16 @@ document.addEventListener("alpine:init", () =>
           maximumFractionDigits: 2,
         }).format(row.maximum / row.minimum) + "×)"
       );
+    },
+    daysAgo(value, now = this.currentDate) {
+      const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Tehran", year: "numeric", month: "2-digit", day: "2-digit",
+      }).formatToParts(now).map(part => [part.type, part.value]));
+      const today = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day));
+      const observed = Date.parse(value + "T00:00:00Z");
+      if (!Number.isFinite(observed)) return "—";
+      const days = Math.max(0, Math.round((today - observed) / 86400000));
+      return numberFormatter(this.locale, { useGrouping: false }).format(days) + " " + (days === 1 ? this.t.dayAgo : this.t.daysAgo);
     },
     formatDate(value) {
       return new Intl.DateTimeFormat(this.locale + "-u-ca-persian", {

@@ -47,6 +47,15 @@ test("English mode uses English digits for years, prices, conversions, multiplie
   assert.ok(!/[۰-۹٠-٩]/.test(app.formatDate("2026-10-08")));
 });
 
+test("data age uses Tehran calendar days and localized digits", () => {
+  const { app } = createApp();
+  assert.equal(app.daysAgo("2026-10-08", new Date("2026-10-10T12:00:00Z")), "۲ روز پیش");
+  app.toggleLanguage();
+  assert.equal(app.daysAgo("2026-10-08", new Date("2026-10-10T12:00:00Z")), "2 days ago");
+  assert.equal(app.daysAgo("2026-10-09", new Date("2026-10-09T21:00:00Z")), "1 day ago");
+  assert.equal(app.daysAgo("2026-10-10", new Date("2026-10-10T12:00:00Z")), "0 days ago");
+});
+
 test("formatting repeated prices reuses formatters while supporting language changes", () => {
   let created = 0;
   const { app } = createApp({}, {

@@ -160,7 +160,7 @@
       <p
         class="mb-3 shrink-0 text-[11px] text-muted"
         x-show="data"
-        x-text="data?t.coverage+' '+formatDate(data.latestDate):''"
+        x-text="data?t.coverage+' '+formatDate(data.latestDate)+' ('+daysAgo(data.latestDate)+')':''"
       ></p>
       <div
         class="table-scroll min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain rounded-xl border border-line bg-surface"
