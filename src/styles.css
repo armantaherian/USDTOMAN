@@ -47,7 +47,7 @@ html[data-theme="dark"] {
 }
 @layer components {
   .icon-button {
-    @apply flex size-8 items-center justify-center rounded-lg border border-line bg-surface transition-colors hover:bg-tint;
+    @apply flex size-7 shrink-0 items-center justify-center rounded-md border border-line bg-surface p-0 leading-none transition-colors hover:bg-tint;
   }
   .source-link {
     @apply text-accent underline-offset-4 hover:underline;

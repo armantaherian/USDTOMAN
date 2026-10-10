@@ -85,20 +85,48 @@
         </h1>
         <nav class="flex shrink-0 gap-1.5" aria-label="Preferences">
           <button
-            class="icon-button text-xs font-semibold"
+            class="icon-button text-[10px] font-semibold leading-none"
             @click="toggleLanguage"
             :aria-label="lang==='fa'?'English':'فارسی'"
             :title="lang==='fa'?'English':'فارسی'"
             x-text="lang==='fa'?'EN':'FA'"
           ></button
           ><button
-            class="icon-button text-lg"
+            class="icon-button"
             @click="toggleTheme"
             :aria-label="theme==='dark'?t.light:t.dark"
             :title="theme==='dark'?t.light:t.dark"
             :aria-pressed="theme==='dark'"
-            x-text="theme==='dark'?'☀':'☾'"
-          ></button>
+          >
+            <svg
+              x-show="theme==='dark'"
+              class="size-3.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+              />
+            </svg>
+            <svg
+              x-show="theme==='light'"
+              class="size-3.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 15.2A8.4 8.4 0 0 1 8.8 4a8.4 8.4 0 1 0 11.2 11.2Z" />
+            </svg>
+          </button>
         </nav>
       </header>
       <p
