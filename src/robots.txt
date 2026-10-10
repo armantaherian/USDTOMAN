@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ohmydevops.github.io/USDTOMAN/sitemap.xml

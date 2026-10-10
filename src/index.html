@@ -5,6 +5,67 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>قیمت سالانه دلار در ایران</title>
+    <meta
+      name="description"
+      content="جدول قیمت دلار در ایران از ۱۳۵۷ تا امروز؛ کمترین و بیشترین نرخ سالانه به تومان، همراه با نام دولت‌ها. Yearly USD prices in Iran, in toman."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#ecebdc" />
+    <link rel="canonical" href="https://ohmydevops.github.io/USDTOMAN/" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="USD / Toman" />
+    <meta
+      property="og:title"
+      content="قیمت سالانه دلار در ایران | USD / Toman"
+    />
+    <meta
+      property="og:description"
+      content="کمترین و بیشترین قیمت سالانه دلار به تومان، از ۱۳۵۷ تا امروز، همراه با نام دولت‌ها."
+    />
+    <meta property="og:url" content="https://ohmydevops.github.io/USDTOMAN/" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta
+      property="og:image"
+      content="https://ohmydevops.github.io/USDTOMAN/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="USD / Toman — yearly dollar prices in Iran"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="USD / Toman | قیمت سالانه دلار در ایران"
+    />
+    <meta
+      name="twitter:description"
+      content="Yearly minimum and maximum US dollar prices in Iran, in toman."
+    />
+    <meta
+      name="twitter:image"
+      content="https://ohmydevops.github.io/USDTOMAN/og-image.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="USD / Toman — yearly dollar prices in Iran"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "USD / Toman",
+        "alternateName": "قیمت سالانه دلار در ایران",
+        "url": "https://ohmydevops.github.io/USDTOMAN/",
+        "description": "Yearly US dollar price ranges in Iran, in toman, with government names.",
+        "inLanguage": ["fa", "en"]
+      }
+    </script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
@@ -19,7 +80,9 @@
       class="mx-auto max-w-[860px] px-4 py-6 sm:px-7 sm:py-8"
     >
       <header class="mb-5 flex items-center justify-between gap-4">
-        <h1 class="text-lg font-semibold sm:text-2xl" x-text="t.title"></h1>
+        <h1 class="text-lg font-semibold sm:text-2xl" x-text="t.title">
+          قیمت سالانه دلار در ایران
+        </h1>
         <nav class="flex shrink-0 gap-1.5" aria-label="Preferences">
           <button
             class="icon-button text-xs font-semibold"
@@ -53,9 +116,15 @@
                 ><th
                   scope="col"
                   :class="column.key==='government'?'w-[34%]':column.key==='year'?'w-[16%]':'w-[25%]'"
-                  :aria-sort="sortKey===column.key?(ascending?'ascending':'descending'):'none'"
+                  :aria-sort="column.key==='government'?null:sortKey===column.key?(ascending?'ascending':'descending'):'none'"
                 >
+                  <span
+                    x-show="column.key==='government'"
+                    class="block px-2 py-3 font-medium sm:px-4 sm:py-3.5"
+                    x-text="t.government"
+                  ></span>
                   <button
+                    x-show="column.key!=='government'"
                     class="flex w-full items-center gap-1.5 px-2 py-3 text-start font-medium transition-colors hover:text-ink sm:px-4 sm:py-3.5"
                     @click="sortBy(column.key)"
                   >

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ecebdc"/>
+  <rect x="56" y="56" width="1088" height="518" rx="28" fill="#f8f5e9" stroke="#d5d5c1" stroke-width="2"/>
+  <rect x="112" y="115" width="90" height="90" rx="20" fill="#386d5c"/>
+  <text x="157" y="180" text-anchor="middle" fill="#f8f5e9" font-family="sans-serif" font-size="70">$</text>
+  <text x="112" y="315" fill="#292d28" font-family="sans-serif" font-size="76" font-weight="bold">USD / Toman</text>
+  <text x="112" y="385" fill="#73796b" font-family="sans-serif" font-size="34">Yearly dollar prices in Iran</text>
+  <text x="112" y="470" fill="#386d5c" font-family="sans-serif" font-size="27">Minimum · Maximum · Government</text>
+</svg>
