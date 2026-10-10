@@ -187,31 +187,35 @@
               <th
                 scope="colgroup"
                 colspan="2"
-                class="w-[24%] px-2 py-2 font-medium sm:px-4"
+                class="w-[24%] px-1 py-2 text-center font-medium sm:px-2"
               >
                 <div
-                  class="flex items-center justify-center gap-1 whitespace-nowrap"
+                  class="grid grid-cols-[1fr_auto_1fr] items-center gap-1 whitespace-nowrap"
                 >
                   <span
-                    class="text-[8px] sm:text-[10px]"
+                    class="text-center text-[8px] sm:text-xs"
                     x-text="t.minimum"
-                  ></span>
-                  <input
-                    id="dollar-amount"
-                    type="text"
-                    dir="ltr"
-                    inputmode="numeric"
-                    :value="formatPrice(dollarAmount)"
-                    @input="updateAmount($event.target.value)"
-                    @blur="$event.target.value = formatPrice(dollarAmount)"
-                    :aria-label="t.amount"
-                    class="min-w-0 w-full max-w-[50px] text-center rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] font-medium text-ink outline-accent sm:text-xs"
-                  />
-                  <small class="text-[9px] font-normal">$</small
-                  ><span
-                    class="text-[8px] sm:text-[10px]"
+                    >کمترین</span
+                  >
+                  <div class="flex items-center gap-0.5" dir="ltr">
+                    <input
+                      id="dollar-amount"
+                      type="text"
+                      dir="ltr"
+                      inputmode="numeric"
+                      :value="formatPrice(dollarAmount)"
+                      @input="updateAmount($event.target.value)"
+                      @blur="$event.target.value = formatPrice(dollarAmount)"
+                      :aria-label="t.amount"
+                      class="w-[36px] sm:w-[44px] text-center rounded border border-line bg-surface px-1 py-0.5 text-[10px] font-medium text-ink outline-accent sm:text-xs"
+                    />
+                    <small class="text-[9px] font-normal">$</small>
+                  </div>
+                  <span
+                    class="text-center text-[8px] sm:text-xs"
                     x-text="t.maximum"
-                  ></span>
+                    >بیشترین</span
+                  >
                 </div>
               </th>
             </tr>
