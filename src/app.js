@@ -105,6 +105,11 @@ document.addEventListener("alpine:init", () =>
       url.searchParams.set("order", this.ascending ? "asc" : "desc");
       window.history.replaceState(null, "", url);
     },
+    governmentName(row) {
+      return row.government
+        .map((person) => person[this.lang])
+        .join(this.lang === "fa" ? "، " : ", ");
+    },
     get sortedRows() {
       if (!this.data) return [];
       const key = this.sortKey,

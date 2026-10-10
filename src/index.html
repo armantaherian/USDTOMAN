@@ -198,10 +198,19 @@
                 </td>
                 <td
                   class="px-2 py-3 text-[10px] leading-4 text-muted sm:px-4 sm:py-3.5 sm:text-sm sm:leading-5"
+                  x-data="{ expanded: false }"
                 >
+                  <button
+                    class="block w-full text-start sm:hidden"
+                    :class="expanded?'whitespace-normal break-words':'truncate'"
+                    @click="expanded = !expanded"
+                    :aria-expanded="expanded"
+                    :aria-label="governmentName(row)"
+                    x-text="expanded || governmentName(row).length <= 24 ? governmentName(row) : governmentName(row).slice(0,24) + '…'"
+                  ></button>
                   <span
-                    class="block whitespace-normal break-words"
-                    x-text="row.government.map(person=>person[lang]).join(lang==='fa'?'، ':', ')"
+                    class="hidden whitespace-normal break-words sm:block"
+                    x-text="governmentName(row)"
                   ></span>
                 </td>
                 <td
