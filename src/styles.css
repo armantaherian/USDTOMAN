@@ -135,7 +135,8 @@ th button {
 /* Native scrolling, styled to match both palettes. */
 .table-scroll {
   scrollbar-width: thin;
-  scrollbar-color: var(--muted) var(--surface);
+  scrollbar-color: color-mix(in srgb, var(--accent) 40%, var(--surface))
+    var(--surface);
   scrollbar-gutter: stable;
 }
 .table-scroll::-webkit-scrollbar {
@@ -146,7 +147,7 @@ th button {
   border-radius: 8px;
 }
 .table-scroll::-webkit-scrollbar-thumb {
-  background: var(--muted);
+  background: color-mix(in srgb, var(--accent) 40%, var(--surface));
   border: 2px solid var(--surface);
   border-radius: 8px;
 }
