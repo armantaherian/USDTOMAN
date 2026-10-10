@@ -25,6 +25,8 @@
   --line: #d5d5c1;
   --tint: #e2e7d7;
   --accent: #386d5c;
+  --minimum: #416186;
+  --maximum: #386d5c;
 }
 html[data-theme="dark"] {
   color-scheme: dark;
@@ -35,6 +37,18 @@ html[data-theme="dark"] {
   --line: #2b3930;
   --tint: #1e3024;
   --accent: #94d8ac;
+  --minimum: #a9c8ed;
+  --maximum: #94d8ac;
+}
+.category-minimum,
+tbody td:nth-child(3),
+tbody td:nth-child(5) {
+  color: var(--minimum);
+}
+.category-maximum,
+tbody td:nth-child(4),
+tbody td:nth-child(6) {
+  color: var(--maximum);
 }
 @layer base {
   body {

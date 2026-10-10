@@ -168,6 +168,7 @@
                     x-show="column.key!=='government'"
                     class="flex w-full items-center justify-center gap-1.5 px-2 py-3 text-center font-medium transition-colors hover:text-ink sm:px-4 sm:py-3.5"
                     @click="sortBy(column.key)"
+                    :class="{'category-minimum': column.key==='minimum', 'category-maximum': column.key==='maximum'}"
                   >
                     <span
                       ><span x-text="t[column.key]"></span
@@ -179,7 +180,7 @@
                     ><span
                       aria-hidden="true"
                       class="text-[11px]"
-                      :class="sortKey===column.key?'text-accent':'opacity-40'"
+                      :class="sortKey===column.key?'opacity-100':'opacity-40'"
                       x-text="sortKey===column.key?(ascending?'↑':'↓'):'↕'"
                     ></span>
                   </button></th
@@ -193,7 +194,7 @@
                   class="grid grid-cols-[1fr_auto_1fr] items-center gap-1 whitespace-nowrap"
                 >
                   <span
-                    class="text-center text-[8px] sm:text-xs"
+                    class="category-minimum text-center text-[8px] sm:text-xs"
                     x-text="t.minimum"
                     >کمترین</span
                   >
@@ -212,7 +213,7 @@
                     <small class="text-[9px] font-normal">$</small>
                   </div>
                   <span
-                    class="text-center text-[8px] sm:text-xs"
+                    class="category-maximum text-center text-[8px] sm:text-xs"
                     x-text="t.maximum"
                     >بیشترین</span
                   >
