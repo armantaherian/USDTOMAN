@@ -6,6 +6,8 @@ const translations = {
     minimum: "کمترین",
     maximum: "بیشترین",
     unit: "تومان",
+    conversion: "ارزش دلاری",
+    amount: "مبلغ به تومان",
     coverage: "آخرین داده:",
     source: "منبع داده:",
     light: "تم روشن",
@@ -20,6 +22,8 @@ const translations = {
     minimum: "Minimum",
     maximum: "Maximum",
     unit: "toman",
+    conversion: "Dollar value",
+    amount: "Amount in toman",
     coverage: "Latest observation:",
     source: "Data sources:",
     light: "Light theme",
@@ -51,6 +55,7 @@ document.addEventListener("alpine:init", () =>
     data: null,
     loading: true,
     error: false,
+    tomanAmount: 1000000,
     sortKey: sortableColumns.includes(initialSort) ? initialSort : "year",
     ascending: sortParameters.get("order") === "asc",
     columns: [
@@ -81,7 +86,10 @@ document.addEventListener("alpine:init", () =>
       document.documentElement.lang = this.lang;
       document.documentElement.dir = this.lang === "fa" ? "rtl" : "ltr";
       document.documentElement.dataset.theme = this.theme;
-      document.title = this.t.title;
+      document.title =
+        this.lang === "fa"
+          ? "قیمت سالانه دلار در ایران؛ کمترین و بیشترین نرخ | USD / Toman"
+          : "Yearly dollar prices in Iran: minimum and maximum | USD / Toman";
     },
     toggleLanguage() {
       this.lang = this.lang === "fa" ? "en" : "fa";
@@ -135,6 +143,15 @@ document.addEventListener("alpine:init", () =>
       return new Intl.NumberFormat(this.locale, { useGrouping: false }).format(
         value,
       );
+    },
+    dollarValue(price) {
+      const amount = Number(this.tomanAmount);
+      if (!Number.isFinite(amount) || amount < 0 || !price || price <= 0)
+        return "—";
+      return new Intl.NumberFormat(this.locale, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      }).format(amount / price);
     },
     formatPrice(value) {
       return value === null

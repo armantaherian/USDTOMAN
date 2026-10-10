@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <title>قیمت سالانه دلار در ایران</title>
+    <title>قیمت سالانه دلار در ایران؛ کمترین و بیشترین نرخ | USD / Toman</title>
     <meta
       name="description"
       content="جدول قیمت دلار در ایران از ۱۳۵۷ تا امروز؛ کمترین و بیشترین نرخ سالانه به تومان، همراه با نام دولت‌ها. Yearly USD prices in Iran, in toman."
@@ -12,7 +12,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#ecebdc" />
     <link rel="canonical" href="https://ohmydevops.github.io/USDTOMAN/" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <meta property="og:type" content="website" />
@@ -78,7 +78,7 @@
   <body class="bg-page text-ink antialiased">
     <main
       x-data="dollarTable"
-      class="mx-auto flex h-dvh max-w-[860px] flex-col overflow-hidden px-4 py-4 sm:px-7 sm:py-6"
+      class="mx-auto flex h-dvh max-w-[980px] flex-col overflow-hidden px-3 py-4 sm:px-7 sm:py-6"
     >
       <header class="mb-5 flex shrink-0 items-center justify-between gap-4">
         <h1 class="text-lg font-semibold sm:text-2xl">
@@ -153,7 +153,7 @@
               <template x-for="column in columns" :key="column.key"
                 ><th
                   scope="col"
-                  :class="column.key==='government'?'w-[50%]':column.key==='year'?'w-[12%]':'w-[19%]'"
+                  :class="column.key==='government'?'w-[32%]':column.key==='year'?'w-[10%]':'w-[17%]'"
                   :aria-sort="column.key==='government'?null:sortKey===column.key?(ascending?'ascending':'descending'):'none'"
                 >
                   <span
@@ -181,6 +181,26 @@
                     ></span>
                   </button></th
               ></template>
+              <th scope="col" class="w-[24%] px-2 py-2 font-medium sm:px-4">
+                <label
+                  for="toman-amount"
+                  class="block text-[10px] sm:text-xs"
+                  x-text="t.conversion"
+                ></label>
+                <div class="mt-1 flex items-center gap-1">
+                  <input
+                    id="toman-amount"
+                    type="number"
+                    min="0"
+                    step="1000"
+                    inputmode="numeric"
+                    x-model="tomanAmount"
+                    :aria-label="t.amount"
+                    class="min-w-0 w-full rounded border border-line bg-surface px-1.5 py-1 text-[10px] text-ink outline-accent sm:text-xs"
+                  />
+                  <small class="text-[9px] font-normal" x-text="t.unit"></small>
+                </div>
+              </th>
             </tr>
           </thead>
           <!-- The build inserts JSON-backed rows for initial rendering and crawlers. -->
@@ -222,8 +242,23 @@
                 <td
                   class="px-2 py-3 text-accent tabular-nums sm:px-4 sm:py-3.5"
                   x-text="formatPrice(row.maximum)"
-                ></td></tr
-            ></template>
+                ></td>
+                <td
+                  class="px-2 py-3 text-[10px] tabular-nums sm:px-4 sm:py-3.5 sm:text-xs"
+                >
+                  <div>
+                    <span class="text-muted" x-text="t.minimum + ': '"></span
+                    ><span x-text="dollarValue(row.maximum)"></span
+                    ><span> $</span>
+                  </div>
+                  <div class="mt-1">
+                    <span class="text-muted" x-text="t.maximum + ': '"></span
+                    ><span x-text="dollarValue(row.minimum)"></span
+                    ><span> $</span>
+                  </div>
+                </td>
+              </tr></template
+            >
           </tbody>
         </table>
         <p
