@@ -1,0 +1,6 @@
+@import "tailwindcss" source("../dist");
+@theme inline {--color-page:var(--page);--color-surface:var(--surface);--color-ink:var(--ink);--color-muted:var(--muted);--color-line:var(--line);--color-tint:var(--tint);--color-accent:var(--accent);--font-sans:Vazirmatn,Arial,sans-serif;}
+:root{color-scheme:light;--page:#fafbf9;--surface:#fff;--ink:#19261f;--muted:#68756d;--line:#e5ebe6;--tint:#f0f7f2;--accent:#24744b}
+html[data-theme=dark]{color-scheme:dark;--page:#101713;--surface:#16201a;--ink:#e7f0ea;--muted:#a0b0a5;--line:#2b3930;--tint:#1e3024;--accent:#94d8ac}
+@layer base{body{font-family:var(--font-sans)}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}th{text-align:start}}
+@layer components{.icon-button{@apply flex size-8 items-center justify-center rounded-lg border border-line bg-surface transition-colors hover:bg-tint}.source-link{@apply text-accent underline-offset-4 hover:underline}}

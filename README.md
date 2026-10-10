@@ -1,6 +1,8 @@
 # Dollar prices in Iran
 
-A buildless static website in Persian and English, with light/dark themes and sortable yearly prices in toman. Serve `dist/` using any static HTTP server; opening the HTML directly from disk does not support the JSON fetch.
+A static website in Persian and English using Alpine.js and compiled Tailwind CSS, with light/dark themes and sortable yearly prices in toman. Click any column header to sort; click again to reverse the order. Serve `dist/` using any static HTTP server; opening the HTML directly from disk does not support the JSON fetch.
+
+Install dependencies with `npm ci`, build CSS and copy the local Alpine runtime with `npm run build`, and run the local preview with `npm run dev`. Edit `dist/index.html`, `dist/app.js`, and `src/styles.css`; rebuild after changing Tailwind classes. `dist/data.json` contains the data, including bilingual government names.
 
 Data source: https://github.com/m-ahmadi/dollar. Prices are already in toman. `node scripts/prepare-data.mjs` aggregates the downloaded `raw-dollar.json` into `dist/data.json`. The archive is a snapshot, not a live feed. It currently covers 1357 through 1405, with the latest observation on 2026-10-08. Single-observation years have null extrema. Other years use available open, high, low and close values; incomplete coverage cannot establish true yearly extremes.
 
