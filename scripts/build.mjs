@@ -2,6 +2,7 @@ import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import { build } from "esbuild";
 import sharp from "sharp";
+import { createHash } from "node:crypto";
 
 // Keep editable source separate from the files served to visitors.
 fs.mkdirSync("dist", { recursive: true });
@@ -33,6 +34,14 @@ const html = fs
   .replace("<!-- STATIC_TABLE_ROWS -->", staticRows);
 fs.writeFileSync("dist/index.html", html);
 fs.copyFileSync("src/data.json", "dist/data.json");
+fs.copyFileSync("src/manifest.webmanifest", "dist/manifest.webmanifest");
+for (const size of [192, 512]) {
+  await sharp("src/assets/favicon-franklin.png")
+    .resize(size, size)
+    .flatten({ background: "#ecebdc" })
+    .png()
+    .toFile(`dist/icon-${size}.png`);
+}
 fs.copyFileSync("src/assets/favicon.svg", "dist/favicon.svg");
 fs.copyFileSync("src/robots.txt", "dist/robots.txt");
 fs.copyFileSync("src/sitemap.xml", "dist/sitemap.xml");
@@ -71,4 +80,25 @@ const result = spawnSync(
   { stdio: "inherit" },
 );
 
-process.exit(result.status ?? 1);
+if (result.status !== 0) process.exit(result.status ?? 1);
+const assets = [
+  "index.html",
+  "app.js",
+  "alpine.min.js",
+  "style.css",
+  "data.json",
+  "manifest.webmanifest",
+  "favicon-32.png",
+  "apple-touch-icon.png",
+  "icon-192.png",
+  "icon-512.png",
+  "fonts/vazirmatn.woff2",
+];
+const hash = createHash("sha256");
+for (const asset of assets) hash.update(fs.readFileSync(`dist/${asset}`));
+hash.update(fs.readFileSync("src/sw.js"));
+const worker = fs
+  .readFileSync("src/sw.js", "utf8")
+  .replace("BUILD_VERSION", hash.digest("hex").slice(0, 16))
+  .replace("BUILD_ASSETS", JSON.stringify(assets));
+fs.writeFileSync("dist/sw.js", worker);

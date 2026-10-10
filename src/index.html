@@ -11,6 +11,7 @@
     />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#ecebdc" />
+    <link rel="manifest" href="manifest.webmanifest" />
     <link rel="canonical" href="https://ohmydevops.github.io/USDTOMAN/" />
 
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -139,6 +140,14 @@
         </nav>
       </header>
       <p
+        class="mb-3 shrink-0 text-[10px] leading-5 text-muted sm:text-xs"
+        x-text="t.introduction"
+      >
+        من همیشه مشکل این که دلار ۲۰ هزار تومانی برای چه موقعی بوده رو داشتم.
+        یکبار برای همیشه گفتم یک چیزی دم دستم باشه که نیاز نباشه سرچ کنم همش.
+        این سایت رو درست کردم.
+      </p>
+      <p
         class="mb-3 shrink-0 text-[11px] text-muted"
         x-show="data"
         x-text="data?t.coverage+' '+formatDate(data.latestDate):''"
@@ -156,7 +165,7 @@
               <template x-for="column in columns" :key="column.key"
                 ><th
                   scope="col"
-                  :class="column.key==='government'?'w-[37%]':column.key==='year'?'w-[9%]':'w-[15%]'"
+                  :class="column.key==='government'?'w-[42%] sm:w-[37%]':column.key==='year'?'w-[14%] sm:w-[9%]':'w-[22%] sm:w-[15%]'"
                   :aria-sort="column.key==='government'?null:sortKey===column.key?(ascending?'ascending':'descending'):'none'"
                 >
                   <span
@@ -188,7 +197,7 @@
               <th
                 scope="colgroup"
                 colspan="2"
-                class="w-[24%] px-1 py-2 text-center font-medium sm:px-2"
+                class="hidden w-[24%] px-1 py-2 text-center font-medium sm:table-cell sm:px-2"
               >
                 <div
                   class="grid grid-cols-[1fr_auto_1fr] items-center gap-1 whitespace-nowrap"
@@ -268,13 +277,13 @@
                 </td>
                 <td
                   dir="ltr"
-                  class="px-0.5 py-3 text-center text-[8px] font-medium tabular-nums sm:text-xs"
+                  class="hidden px-0.5 py-3 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
                 >
                   <bdi dir="ltr" x-text="tomanValue(row.minimum)"></bdi>
                 </td>
                 <td
                   dir="ltr"
-                  class="px-0.5 py-3 text-center text-[8px] font-medium tabular-nums sm:text-xs"
+                  class="hidden px-0.5 py-3 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
                 >
                   <bdi dir="ltr" x-text="tomanValue(row.maximum)"></bdi>
                 </td></tr

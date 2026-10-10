@@ -50,6 +50,13 @@ tbody td:nth-child(4),
 tbody td:nth-child(6) {
   color: var(--maximum);
 }
+@media (max-width: 639px) {
+  tbody td:nth-child(5),
+  tbody td:nth-child(6),
+  thead th[colspan="2"] {
+    display: none;
+  }
+}
 @layer base {
   body {
     font-family: var(--font-sans);

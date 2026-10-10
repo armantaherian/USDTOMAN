@@ -36,3 +36,10 @@ Prices are a stored snapshot, not a live feed. Sources: [TGJU](https://www.tgju.
 Early annual reference prices are repeated in both minimum and maximum columns. Some older ranges use monthly averages. The JSON records each year's source and resolution.
 
 Font: [Vazirmatn](https://github.com/rastikerdar/vazirmatn).
+
+## Offline and installation
+
+The site includes a web app manifest and service worker. After one successful online visit, the interface, font, and data are cached for offline use. Install it using your browser's install option where available. HTTPS or localhost is required.
+
+Published JSON data is checked every minute while the page is visible, on reconnection, and when returning to the page. App updates are checked every five minutes and on reconnection or returning to the page. A new app version reloads automatically. This refreshes the published snapshot; it does not fetch live market prices.
+

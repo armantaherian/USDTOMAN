@@ -1,6 +1,8 @@
 const translations = {
   fa: {
     title: "قیمت سالانه دلار در ایران",
+    introduction:
+      "من همیشه مشکل این که دلار ۲۰ هزار تومانی برای چه موقعی بوده رو داشتم. یکبار برای همیشه گفتم یک چیزی دم دستم باشه که نیاز نباشه سرچ کنم همش. این سایت رو درست کردم.",
     year: "سال",
     government: "دولت",
     minimum: "کمترین",
@@ -17,6 +19,8 @@ const translations = {
   },
   en: {
     title: "Yearly dollar prices in Iran",
+    introduction:
+      "I always had trouble remembering when the dollar was 20,000 tomans. Once and for all, I wanted something handy so I wouldn't have to keep searching. So I made this website.",
     year: "Year",
     government: "Government",
     minimum: "Minimum",
@@ -72,14 +76,38 @@ document.addEventListener("alpine:init", () =>
     },
     async init() {
       this.syncPage();
+      await this.refreshData();
+      this.onOnline = () => this.refreshData();
+      this.onVisible = () => {
+        if (document.visibilityState === "visible") this.refreshData();
+      };
+      window.addEventListener("online", this.onOnline);
+      document.addEventListener("visibilitychange", this.onVisible);
+      this.refreshTimer = setInterval(() => {
+        if (document.visibilityState === "visible") this.refreshData();
+      }, 60000);
+    },
+    destroy() {
+      clearInterval(this.refreshTimer);
+      window.removeEventListener("online", this.onOnline);
+      document.removeEventListener("visibilitychange", this.onVisible);
+    },
+    async refreshData() {
+      if (this.refreshing) return;
+      this.refreshing = true;
       try {
-        const response = await fetch("data.json");
+        const response = await fetch("data.json", { cache: "no-store" });
         if (!response.ok) throw Error(response.status);
-        this.data = await response.json();
+        const data = await response.json();
+        if (!Array.isArray(data.years)) throw Error("Invalid data");
+        if (JSON.stringify(data) !== JSON.stringify(this.data))
+          this.data = data;
+        this.error = false;
       } catch {
-        this.error = true;
+        this.error = !this.data;
       } finally {
         this.loading = false;
+        this.refreshing = false;
       }
     },
     syncPage() {
@@ -180,3 +208,31 @@ document.addEventListener("alpine:init", () =>
     },
   })),
 );
+
+if ("serviceWorker" in navigator) {
+  const alreadyControlled = Boolean(navigator.serviceWorker.controller);
+  let reloading = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (alreadyControlled && !reloading) {
+      reloading = true;
+      window.location.reload();
+    }
+  });
+  window.addEventListener("load", async () => {
+    try {
+      const registration = await navigator.serviceWorker.register("sw.js", {
+        updateViaCache: "none",
+      });
+      const check = () => registration.update().catch(() => {});
+      window.addEventListener("online", check);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") check();
+      });
+      setInterval(() => {
+        if (document.visibilityState === "visible") check();
+      }, 300000);
+    } catch {
+      // The website still works when installation is unavailable.
+    }
+  });
+}

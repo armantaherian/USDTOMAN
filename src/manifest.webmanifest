@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "قیمت سالانه دلار در ایران",
+  "short_name": "USD / Toman",
+  "description": "قیمت سالانه دلار در ایران به تومان",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ecebdc",
+  "theme_color": "#386d5c",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
