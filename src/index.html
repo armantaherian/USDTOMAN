@@ -219,7 +219,7 @@
                 <td
                   class="px-2 py-3 font-medium font-medium tabular-nums sm:px-4 sm:py-3.5"
                 >
-                  <span x-text="formatYear(row.year)"></span>
+                  <bdi dir="ltr" x-text="formatYear(row.year)"></bdi>
                 </td>
                 <td
                   class="px-2 py-3 text-[10px] leading-4 text-muted sm:px-4 sm:py-3.5 sm:text-sm sm:leading-5"
@@ -240,12 +240,14 @@
                 </td>
                 <td
                   class="px-2 py-3 font-medium tabular-nums sm:px-4 sm:py-3.5"
-                  x-text="formatPrice(row.minimum)"
-                ></td>
+                >
+                  <bdi dir="ltr" x-text="formatPrice(row.minimum)"></bdi>
+                </td>
                 <td
                   class="px-2 py-3 text-accent font-medium tabular-nums sm:px-4 sm:py-3.5"
-                  x-text="formatPrice(row.maximum)"
-                ></td>
+                >
+                  <bdi dir="ltr" x-text="formatPrice(row.maximum)"></bdi>
+                </td>
                 <td
                   class="px-2 py-3 text-[10px] font-medium tabular-nums sm:px-4 sm:py-3.5 sm:text-xs"
                 >
