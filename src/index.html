@@ -181,8 +181,21 @@
               >
                 <td
                   class="px-2 py-3 font-medium tabular-nums sm:px-4 sm:py-3.5"
-                  x-text="formatYear(row.year)"
-                ></td>
+                >
+                  <template x-if="row.year >= 1390">
+                    <a
+                      class="text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent"
+                      href="https://www.tgju.org/profile/price_dollar_rl/charts"
+                      target="_blank"
+                      rel="noopener"
+                      :title="lang==='fa'?'نمودار دلار در TGJU؛ بازهٔ سال '+formatYear(row.year)+' را انتخاب کنید':'TGJU dollar chart; select the date range for '+row.year"
+                      x-text="formatYear(row.year)"
+                    ></a>
+                  </template>
+                  <template x-if="row.year < 1390"
+                    ><span x-text="formatYear(row.year)"></span
+                  ></template>
+                </td>
                 <td class="px-2 py-3 leading-5 text-muted sm:px-4 sm:py-3.5">
                   <span
                     class="block whitespace-normal break-words"
