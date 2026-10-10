@@ -44,6 +44,10 @@ await sharp("src/assets/favicon.svg")
   .png()
   .toFile("dist/apple-touch-icon.png");
 await sharp("src/assets/og-image.svg").png().toFile("dist/og-image.png");
+await sharp("src/assets/og-image-2.png")
+  .resize(1200, 630)
+  .png()
+  .toFile("dist/og-image-2.png");
 fs.copyFileSync("node_modules/alpinejs/dist/cdn.min.js", "dist/alpine.min.js");
 
 await build({
