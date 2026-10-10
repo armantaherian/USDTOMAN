@@ -153,6 +153,13 @@ document.addEventListener("alpine:init", () =>
         maximumFractionDigits: 2,
       }).format(amount / price);
     },
+    updateAmount(value) {
+      const normalized = value
+        .replace(/[۰-۹]/g, (digit) => "۰۱۲۳۴۵۶۷۸۹".indexOf(digit))
+        .replace(/[٠-٩]/g, (digit) => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
+        .replace(/[,٬\s]/g, "");
+      if (/^\d*$/.test(normalized)) this.tomanAmount = Number(normalized);
+    },
     formatPrice(value) {
       return value === null
         ? "—"

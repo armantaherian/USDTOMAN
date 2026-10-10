@@ -185,13 +185,14 @@
                 <div class="flex items-center gap-1">
                   <input
                     id="toman-amount"
-                    type="number"
-                    min="0"
-                    step="1000"
+                    type="text"
+                    dir="ltr"
                     inputmode="numeric"
-                    x-model="tomanAmount"
+                    :value="formatPrice(tomanAmount)"
+                    @input="updateAmount($event.target.value)"
+                    @blur="$event.target.value = formatPrice(tomanAmount)"
                     :aria-label="t.amount"
-                    class="min-w-0 w-full rounded border border-line bg-surface px-1.5 py-1 text-[10px] text-ink outline-accent sm:text-xs"
+                    class="min-w-0 w-full max-w-[110px] rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] text-ink outline-accent sm:text-xs"
                   />
                   <small class="text-[9px] font-normal" x-text="t.unit"></small>
                 </div>
@@ -241,59 +242,13 @@
                 <td
                   class="px-2 py-3 text-[10px] tabular-nums sm:px-4 sm:py-3.5 sm:text-xs"
                 >
-                  <span dir="ltr" class="block whitespace-nowrap text-left" x-text="dollarValue(row.maximum) + ' – ' + dollarValue(row.minimum) + ' 
-                </td>
-              </tr></template
-            >
-          </tbody>
-        </table>
-        <p
-          role="status"
-          class="px-4 py-5 text-sm text-muted"
-          x-show="loading||error"
-          x-text="error?t.error:t.loading"
-        ></p>
-      </div>
-      <footer
-        class="mt-4 flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-3 text-[11px] text-muted"
-      >
-        <span x-text="t.source"></span
-        ><a
-          class="source-link"
-          href="https://www.tgju.org/profile/price_dollar_rl/history"
-          target="_blank"
-          rel="noopener"
-          >TGJU ↗</a
-        ><span>·</span
-        ><a
-          class="source-link"
-          href="https://netarz.ir/wiki/dollar-price-by-year"
-          target="_blank"
-          rel="noopener"
-          >NetArz / نِت اَرز ↗</a
-        ><span>·</span
-        ><a
-          class="source-link"
-          href="https://www.khabaronline.ir/news/189536"
-          target="_blank"
-          rel="noopener"
-          >KhabarOnline / خبرآنلاین ↗</a
-        >
-        <a
-          class="source-link ms-auto"
-          href="https://github.com/ohmydevops/USDTOMAN"
-          target="_blank"
-          rel="noopener"
-          >GitHub ↗</a
-        >
-      </footer>
-    </main>
-  </body>
-</html>
-"></span>
-                </td>
-              </tr></template
-            >
+                  <span
+                    dir="ltr"
+                    class="block whitespace-nowrap text-left"
+                    x-text="dollarValue(row.maximum) + ' – ' + dollarValue(row.minimum) + ' $'"
+                  ></span>
+                </td></tr
+            ></template>
           </tbody>
         </table>
         <p
