@@ -19,6 +19,8 @@ npm run dev
 
 Open http://127.0.0.1:4173/. Deploy the `dist/` folder to any static host.
 
+For GitHub Pages, select **Deploy from a branch → main → / (root)**. The root entry page opens the website in `dist/`. No GitHub Actions workflow is needed.
+
 ## Built with
 
 Alpine.js and Tailwind CSS. Edit `dist/index.html`, `dist/app.js`, and `src/styles.css`, then run `npm run build`.
