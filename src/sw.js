@@ -49,6 +49,12 @@ self.addEventListener("fetch", (event) => {
     (async () => {
       const cache = await caches.open(CACHE);
       const key = new URL(asset, self.registration.scope).href;
+      // The build creates a new cache whenever assets change. Only the page
+      // and price snapshot need network-first freshness within that version.
+      if (asset !== "index.html" && asset !== "data.json") {
+        const cached = await cache.match(key);
+        if (cached) return cached;
+      }
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 4000);
       try {

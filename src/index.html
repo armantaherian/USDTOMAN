@@ -193,7 +193,7 @@
                       ><span x-text="t[column.key]"></span
                       ><small
                         x-show="column.unit"
-                        class="mt-0.5 block text-[9px] font-normal opacity-75 sm:ms-1 sm:inline sm:text-[10px]"
+                        class="mt-0.5 block text-[9px] font-normal sm:ms-1 sm:inline sm:text-[10px]"
                         x-text="'('+t.unit+')'"
                       ></small></span
                     ><span
@@ -263,8 +263,10 @@
                     <template x-for="person in [primaryPerson(row)]" :key="person.en">
                       <button
                         type="button"
-                        class="portrait-person"
-                        :aria-label="person[lang]"
+                        class="portrait-person government-trigger"
+                        @click="showGovernment(row)"
+                        aria-haspopup="dialog"
+                        :aria-label="t.governmentTree + ' ' + formatYear(row.year) + ' — ' + person[lang]"
                         x-data="{
                           open() {
                             const tip = $refs.tooltip;
@@ -285,14 +287,15 @@
                         @scroll.window.capture="close()"
                         @resize.window="close()"
                       >
-                        <img :src="portrait(person)" :alt="person[lang]" width="40" height="40" loading="lazy" />
+                        <img :src="portrait(person)" :alt="person[lang]" width="40" height="40" loading="lazy" decoding="async" />
+                    <span class="government-details" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="2" width="8" height="5" rx="1"/><path d="M12 7v4M4 15v-4h16v4"/><rect x="1" y="15" width="6" height="5" rx="1"/><rect x="17" y="15" width="6" height="5" rx="1"/></svg>
+                      <span class="government-details-arrow" aria-hidden="true">↗</span>
+                    </span>
                         <span x-ref="tooltip" popover="manual" class="portrait-tooltip" role="tooltip" :dir="lang==='fa'?'rtl':'ltr'" x-text="person[lang]"></span>
                       </button>
                     </template>
-                    <button type="button" class="portrait-person government-details" @click="showGovernment(row)" :aria-label="t.governmentTree + ' ' + formatYear(row.year)" :title="t.governmentTree + ' ' + formatYear(row.year)" aria-haspopup="dialog">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="2" width="8" height="5" rx="1"/><path d="M12 7v4M4 15v-4h16v4"/><rect x="1" y="15" width="6" height="5" rx="1"/><rect x="17" y="15" width="6" height="5" rx="1"/></svg>
-                      <span class="government-details-arrow" aria-hidden="true">↗</span>
-                    </button>
+
                   </div>
 
                 </td>
@@ -346,9 +349,9 @@
             <button type="button" class="icon-button" @click="$refs.governmentDialog.close()" :aria-label="t.close" autofocus>✕</button>
           </header>
           <p class="mt-2 text-[9px] leading-4 text-muted" x-text="t.officeholdersNote"></p>
-          <p class="mt-2 text-[10px] text-muted" x-text="t.personHint"></p>
+          <p class="mt-2 hidden text-[10px] text-muted md:block" x-text="t.personHint"></p>
           <div class="mt-3 grid items-start gap-3 md:grid-cols-[220px_minmax(0,1fr)]" dir="ltr">
-            <aside class="order-2 rounded-xl border border-line bg-tint p-4 md:sticky md:top-0 md:order-1" :dir="lang==='fa'?'rtl':'ltr'" aria-live="polite">
+            <aside class="hidden rounded-xl border border-line bg-tint p-4 md:block md:sticky md:top-0" :dir="lang==='fa'?'rtl':'ltr'" aria-live="polite">
               <template x-if="selectedGovernmentPerson">
                 <div>
                   <template x-if="portrait(selectedGovernmentPerson)"><img class="mb-3 h-14 w-14 rounded-full border border-line" :src="portrait(selectedGovernmentPerson)" :alt="selectedGovernmentPerson[lang]" width="56" height="56" /></template>
@@ -367,9 +370,9 @@
                   <template x-for="node in [...governmentLeaders.filter(node => node.role!=='معاون اول'), ...governmentMinisters]" :key="node.role">
                     <li>
                       <template x-for="person in node.members" :key="person.en">
-                        <button type="button" class="grid w-full grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] items-center gap-3 rounded px-2 py-2 text-start transition-colors hover:bg-tint focus-visible:outline-accent" :class="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role?'bg-tint text-accent':'text-ink'" :aria-pressed="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role" @click="selectGovernmentPerson(person)">
-                          <span class="text-[10px] leading-4 text-muted" x-text="node.label"></span>
+                        <button type="button" class="grid w-full grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-center gap-3 rounded px-2 py-2 text-start transition-colors hover:bg-tint focus-visible:outline-accent" :class="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role?'md:bg-tint md:text-accent':'text-ink'" :aria-pressed="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role" @click="if (window.matchMedia('(min-width: 768px)').matches) selectGovernmentPerson(person)">
                           <span class="text-xs leading-4" x-text="person[lang]"></span>
+                          <span class="text-[10px] leading-4 text-muted" x-text="node.label"></span>
                         </button>
                       </template>
                     </li>
@@ -382,9 +385,9 @@
                   <template x-for="node in centralBankTree ? [centralBankTree] : []" :key="node.role">
                     <li>
                       <template x-for="person in node.members" :key="person.en">
-                        <button type="button" class="grid w-full grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] items-center gap-3 rounded px-2 py-2 text-start transition-colors hover:bg-tint focus-visible:outline-accent" :class="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role?'bg-tint text-accent':'text-ink'" :aria-pressed="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role" @click="selectGovernmentPerson(person)">
-                          <span class="text-[10px] leading-4 text-muted" x-text="node.label"></span>
+                        <button type="button" class="grid w-full grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-center gap-3 rounded px-2 py-2 text-start transition-colors hover:bg-tint focus-visible:outline-accent" :class="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role?'md:bg-tint md:text-accent':'text-ink'" :aria-pressed="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role" @click="if (window.matchMedia('(min-width: 768px)').matches) selectGovernmentPerson(person)">
                           <span class="text-xs leading-4" x-text="person[lang]"></span>
+                          <span class="text-[10px] leading-4 text-muted" x-text="node.label"></span>
                         </button>
                       </template>
                     </li>

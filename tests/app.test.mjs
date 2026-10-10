@@ -5,7 +5,7 @@ import vm from "node:vm";
 import { build } from "esbuild";
 import { governmentForYear, primaryGovernmentPerson } from "../src/government.js";
 
-function createApp(saved = {}) {
+function createApp(saved = {}, intl = Intl) {
   let factory;
   const portraits = JSON.parse(fs.readFileSync("src/portraits.json", "utf8"));
   const governmentData = JSON.parse(fs.readFileSync("src/government.json", "utf8"));
@@ -13,6 +13,7 @@ function createApp(saved = {}) {
   const root = { dataset: {} };
   const source = fs.readFileSync("src/app.js", "utf8").replace(/^import .*;\r?\n/gm, "");
   vm.runInNewContext(source, {
+    Intl: intl,
     portraits,
     governmentData,
     governmentForYear,
@@ -44,6 +45,18 @@ test("English mode uses English digits for years, prices, conversions, multiplie
   assert.equal(app.tomanValue(100), "10,000");
   assert.equal(app.priceMultiplier({ minimum: 100, maximum: 225 }), "(2.25×)");
   assert.ok(!/[۰-۹٠-٩]/.test(app.formatDate("2026-10-08")));
+});
+
+test("formatting repeated prices reuses formatters while supporting language changes", () => {
+  let created = 0;
+  const { app } = createApp({}, {
+    NumberFormat: function (...args) { created++; return new Intl.NumberFormat(...args); },
+    DateTimeFormat: Intl.DateTimeFormat,
+  });
+  for (let i = 0; i < 100; i++) app.formatPrice(1000);
+  app.toggleLanguage();
+  for (let i = 0; i < 100; i++) assert.equal(app.formatPrice(1000), "1,000");
+  assert.equal(created, 2);
 });
 
 test("government tree shows finance transitions and the Central Bank governor for the selected year", () => {
@@ -118,5 +131,5 @@ test("compiled app runs as a classic script and registers the Alpine component",
     navigator: {},
   });
   assert.equal(typeof factory, "function");
-  assert.equal(factory().portrait({ en: "Hassan Rouhani" }), "portraits/hassan-rouhani-illustrated.png");
+  assert.equal(factory().portrait({ en: "Hassan Rouhani" }), "portraits/hassan-rouhani-illustrated.webp");
 });

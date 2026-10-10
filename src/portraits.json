@@ -1,87 +1,98 @@
 {
   "Mehdi Bazargan (interim)": {
-    "src": "portraits/mehdi-bazargan-illustrated.png",
+    "src": "portraits/mehdi-bazargan-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Mehdi_Bazargan_Portrait.jpg",
     "artist": "Unknown author Unknown author",
     "license": "Public domain",
-    "originalSrc": "portraits/mehdi-bazargan.jpg"
+    "originalSrc": "portraits/mehdi-bazargan.jpg",
+    "illustrationSrc": "portraits/mehdi-bazargan-illustrated.png"
   },
   "Abolhassan Banisadr": {
-    "src": "portraits/abolhassan-banisadr-illustrated.png",
+    "src": "portraits/abolhassan-banisadr-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Abolhassan_Banisadr_portrait_1980_2.jpg",
     "artist": "Unknown author Unknown author",
     "license": "Public domain",
-    "originalSrc": "portraits/abolhassan-banisadr.jpg"
+    "originalSrc": "portraits/abolhassan-banisadr.jpg",
+    "illustrationSrc": "portraits/abolhassan-banisadr-illustrated.png"
   },
   "Mohammad-Ali Rajai": {
-    "src": "portraits/mohammad-ali-rajai-illustrated.png",
+    "src": "portraits/mohammad-ali-rajai-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_Mohammad-Ali_Rajai_Edit.jpg",
     "artist": "Unknown author Unknown author",
     "license": "Public domain",
-    "originalSrc": "portraits/mohammad-ali-rajai.jpg"
+    "originalSrc": "portraits/mohammad-ali-rajai.jpg",
+    "illustrationSrc": "portraits/mohammad-ali-rajai-illustrated.png"
   },
   "Ali Khamenei": {
-    "src": "portraits/ali-khamenei-illustrated.png",
+    "src": "portraits/ali-khamenei-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Ali_Khamenei_Nowruz_message_official_portrait_1397_02_(3_x_4_cropped).jpg",
     "artist": "khamenei.ir",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "originalSrc": "portraits/ali-khamenei.jpg"
+    "originalSrc": "portraits/ali-khamenei.jpg",
+    "illustrationSrc": "portraits/ali-khamenei-illustrated.png"
   },
   "Akbar Hashemi Rafsanjani": {
-    "src": "portraits/akbar-hashemi-rafsanjani-illustrated.png",
+    "src": "portraits/akbar-hashemi-rafsanjani-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Akbar_Hashemi_Rafsanjani_by_Fars_01_(cropped).jpg",
     "artist": "Fars News Agency",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "originalSrc": "portraits/akbar-hashemi-rafsanjani.jpg"
+    "originalSrc": "portraits/akbar-hashemi-rafsanjani.jpg",
+    "illustrationSrc": "portraits/akbar-hashemi-rafsanjani-illustrated.png"
   },
   "Mohammad Khatami": {
-    "src": "portraits/mohammad-khatami-illustrated.png",
+    "src": "portraits/mohammad-khatami-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Funeral_of_Kamal_Kharrazi_11_Avash_(cropped).webp",
     "artist": "Mohammadreza Abbasi",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "originalSrc": "portraits/mohammad-khatami.jpg"
+    "originalSrc": "portraits/mohammad-khatami.jpg",
+    "illustrationSrc": "portraits/mohammad-khatami-illustrated.png"
   },
   "Mahmoud Ahmadinejad": {
-    "src": "portraits/mahmoud-ahmadinejad-illustrated.png",
+    "src": "portraits/mahmoud-ahmadinejad-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Mahmoud_Ahmedinejad_July_2026_(cropped).jpg",
     "artist": "https://tasnimnews.ir",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "originalSrc": "portraits/mahmoud-ahmadinejad.jpg"
+    "originalSrc": "portraits/mahmoud-ahmadinejad.jpg",
+    "illustrationSrc": "portraits/mahmoud-ahmadinejad-illustrated.png"
   },
   "Masoud Pezeshkian": {
-    "src": "portraits/masoud-pezeshkian-illustrated.png",
+    "src": "portraits/masoud-pezeshkian-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Pezeshkian_(cropped).jpg",
     "artist": "Alireza Masoumi",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "originalSrc": "portraits/masoud-pezeshkian.jpg"
+    "originalSrc": "portraits/masoud-pezeshkian.jpg",
+    "illustrationSrc": "portraits/masoud-pezeshkian-illustrated.png"
   },
   "Hassan Rouhani": {
-    "src": "portraits/hassan-rouhani-illustrated.png",
+    "src": "portraits/hassan-rouhani-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Hassan_Rouani_2017_portrait.jpg",
     "artist": "Khamenei.ir",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "originalSrc": "portraits/hassan-rouhani.jpg"
+    "originalSrc": "portraits/hassan-rouhani.jpg",
+    "illustrationSrc": "portraits/hassan-rouhani-illustrated.png"
   },
   "Ebrahim Raisi": {
-    "src": "portraits/ebrahim-raisi-illustrated.png",
+    "src": "portraits/ebrahim-raisi-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Ebrahim_Raisi_in_2024_(3x4_cropped).jpg",
     "artist": "President.az",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "originalSrc": "portraits/ebrahim-raisi.jpg"
+    "originalSrc": "portraits/ebrahim-raisi.jpg",
+    "illustrationSrc": "portraits/ebrahim-raisi-illustrated.png"
   },
   "Mohammad Mokhber (acting)": {
-    "src": "portraits/mohammad-mokhber-illustrated.png",
+    "src": "portraits/mohammad-mokhber-illustrated.webp",
     "source": "https://commons.wikimedia.org/wiki/File:Mohammad_Mokhber_2026.jpg",
     "artist": "khamenei.ir",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "originalSrc": "portraits/mohammad-mokhber.jpg"
+    "originalSrc": "portraits/mohammad-mokhber.jpg",
+    "illustrationSrc": "portraits/mohammad-mokhber-illustrated.png"
   }
 }

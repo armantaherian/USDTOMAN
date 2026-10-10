@@ -81,6 +81,12 @@ const translations = {
     personHint: "Select a name to view their details.",
   },
 };
+const numberFormatters = new Map();
+const numberFormatter = (locale, options) => {
+  const key = locale + JSON.stringify(options);
+  if (!numberFormatters.has(key)) numberFormatters.set(key, new Intl.NumberFormat(locale, options));
+  return numberFormatters.get(key);
+};
 const preference = (key) => {
   try {
     return localStorage.getItem(key);
@@ -285,7 +291,7 @@ document.addEventListener("alpine:init", () =>
       });
     },
     formatYear(value) {
-      return new Intl.NumberFormat(this.locale, { useGrouping: false }).format(
+      return numberFormatter(this.locale, { useGrouping: false }).format(
         value,
       );
     },
@@ -293,7 +299,7 @@ document.addEventListener("alpine:init", () =>
       const amount = Number(this.dollarAmount);
       if (!Number.isFinite(amount) || amount < 0 || !price || price <= 0)
         return "—";
-      return new Intl.NumberFormat(this.locale, {
+      return numberFormatter(this.locale, {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       })
@@ -310,7 +316,7 @@ document.addEventListener("alpine:init", () =>
     formatPrice(value) {
       return value === null
         ? "—"
-        : new Intl.NumberFormat(this.locale, {
+        : numberFormatter(this.locale, {
             maximumFractionDigits: 0,
           }).format(value);
     },
@@ -323,7 +329,7 @@ document.addEventListener("alpine:init", () =>
       )
         return "—";
       return (
-        "(" + new Intl.NumberFormat(this.locale, {
+        "(" + numberFormatter(this.locale, {
           useGrouping: false,
           maximumFractionDigits: 2,
         }).format(row.maximum / row.minimum) + "×)"

@@ -8,8 +8,9 @@ import { primaryGovernmentPerson } from "../src/government.js";
 // Keep editable source separate from the files served to visitors.
 fs.mkdirSync("dist", { recursive: true });
 fs.cpSync("src/assets/fonts", "dist/fonts", { recursive: true });
-fs.cpSync("src/assets/portraits", "dist/portraits", { recursive: true });
 const portraits = JSON.parse(fs.readFileSync("src/portraits.json", "utf8"));
+fs.mkdirSync("dist/portraits", { recursive: true });
+for (const portrait of Object.values(portraits)) fs.copyFileSync("src/assets/" + portrait.src, "dist/" + portrait.src);
 const leadership = JSON.parse(fs.readFileSync("src/leadership.json", "utf8"));
 const data = JSON.parse(fs.readFileSync("src/data.json", "utf8"));
 const escapeHtml = (value) =>
