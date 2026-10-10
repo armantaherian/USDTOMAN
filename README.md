@@ -1,11 +1,32 @@
-# Dollar prices in Iran
+# USD / Toman
 
-A static website in Persian and English using Alpine.js and compiled Tailwind CSS, with light/dark themes and sortable yearly prices in toman. Click any column header to sort; click again to reverse the order. Serve `dist/` using any static HTTP server; opening the HTML directly from disk does not support the JSON fetch.
+A simple static website showing yearly US dollar prices in Iran, in toman.
 
-Install dependencies with `npm ci`, build CSS and copy the local Alpine runtime with `npm run build`, and run the local preview with `npm run dev`. Edit `dist/index.html`, `dist/app.js`, and `src/styles.css`; rebuild after changing Tailwind classes. `dist/data.json` contains the data, including bilingual government names.
+- Persian and English
+- Light and dark themes
+- Sortable column headers
+- Government names for each year
+- Responsive layout with Vazirmatn font
+- Local JSON data in `dist/data.json`
 
-Data source: https://github.com/m-ahmadi/dollar. Prices are already in toman. `node scripts/prepare-data.mjs` aggregates the downloaded `raw-dollar.json` into `dist/data.json`. The archive is a snapshot, not a live feed. It currently covers 1357 through 1405, with the latest observation on 2026-10-08. Single-observation years have null extrema. Other years use available open, high, low and close values; incomplete coverage cannot establish true yearly extremes.
+## Run locally
 
-Updated sources: TGJU daily OHLC (rial divided by 10) for 1391 onward; NetArz published yearly ranges for 1364–1390. NetArz's 1364–1379 ranges are extrema of monthly averages, not daily prices. The earlier annual-only rows retain unknown extrema. `node scripts/improve-data.mjs` builds the combined JSON from the stored TGJU and NetArz snapshots after `prepare-data.mjs`. Source and resolution are recorded per year in JSON. The latest observation remains 2026-10-08.
+```sh
+npm ci
+npm run build
+npm run dev
+```
 
-Font: Vazirmatn, https://github.com/rastikerdar/vazirmatn (SIL Open Font License), loaded through the version-pinned jsDelivr stylesheet.
+Open http://127.0.0.1:4173/. Deploy the `dist/` folder to any static host.
+
+## Built with
+
+Alpine.js and Tailwind CSS. Edit `dist/index.html`, `dist/app.js`, and `src/styles.css`, then run `npm run build`.
+
+## Data
+
+Prices are a stored snapshot, not a live feed. Sources: [TGJU](https://www.tgju.org/profile/price_dollar_rl/history), [NetArz](https://netarz.ir/wiki/dollar-price-by-year), and [KhabarOnline](https://www.khabaronline.ir/news/189536).
+
+Early annual reference prices are repeated in both minimum and maximum columns. Some older ranges use monthly averages. The JSON records each year's source and resolution.
+
+Font: [Vazirmatn](https://github.com/rastikerdar/vazirmatn).
