@@ -1,4 +1,7 @@
 import portraits from "./portraits.json";
+import governmentData from "./government.json";
+import { governmentForYear, primaryGovernmentPerson, organizationNodes } from "./government.js";
+import leadership from "./leadership.json";
 
 const translations = {
   fa: {
@@ -19,6 +22,28 @@ const translations = {
     dark: "تم تاریک",
     loading: "در حال دریافت داده‌ها…",
     error: "دریافت داده‌ها ناموفق بود.",
+    more: "بیشتر",
+    close: "بستن",
+    governmentTree: "ساختار دولت در سال",
+    cabinet: "هیئت دولت",
+    officeholdersNote: "افرادی که در بخشی از این سال خدمت کرده‌اند. نام‌های متعدد نشان‌دهنده تغییر مسئول هستند؛ همه هم‌زمان در سمت نبوده‌اند. تاریخ‌ها هجری شمسی هستند.",
+    historicalSource: "منبع تاریخی",
+    imageSources: "منبع تصاویر",
+    imageNote: "پرتره‌ها با هوش مصنوعی و بر اساس عکس‌های ویکی‌مدیا کامانز بازطراحی شده‌اند. منابع عکس‌های اصلی:",
+    publicDomain: "مالکیت عمومی",
+    unknownAuthor: "پدیدآورنده نامشخص",
+    acting: "سرپرست",
+    yearEvents: "تغییرات این سال",
+    portraitRule: "تصویر جدول مربوط به فردی است که در این سال بیشترین مدت مسئولیت را داشته است.",
+    centralBank: "بانک مرکزی",
+    president: "رئیس‌جمهور",
+    primeMinister: "نخست‌وزیر",
+    termsAndSources: "دوره مسئولیت و منابع",
+    otherLeaders: "دیگر مسئولان این سال",
+    zoomIn: "بزرگ‌نمایی",
+    zoomOut: "کوچک‌نمایی",
+    fitChart: "نمایش کامل",
+    chartHint: "برای دیدن دوره مسئولیت و منابع، روی هر کادر بزنید.",
   },
   en: {
     title: "Yearly dollar prices in Iran",
@@ -38,6 +63,28 @@ const translations = {
     dark: "Dark theme",
     loading: "Loading data…",
     error: "Could not load data. Please reload.",
+    more: "More",
+    close: "Close",
+    governmentTree: "Government in",
+    cabinet: "Cabinet",
+    officeholdersNote: "People who served during part of this year. Multiple names indicate changes in office; they did not all serve simultaneously. Dates use the Persian calendar.",
+    historicalSource: "Historical source",
+    imageSources: "Portrait sources",
+    imageNote: "AI-generated illustrated portraits based on Wikimedia Commons photographs. Original photo sources:",
+    publicDomain: "Public domain",
+    unknownAuthor: "Unknown author",
+    acting: "Acting",
+    yearEvents: "Changes this year",
+    portraitRule: "The table portrait represents the leader who served longest during this year.",
+    centralBank: "Central Bank",
+    president: "President",
+    primeMinister: "Prime Minister",
+    termsAndSources: "Terms and sources",
+    otherLeaders: "Other leaders this year",
+    zoomIn: "Zoom in",
+    zoomOut: "Zoom out",
+    fitChart: "Fit chart",
+    chartHint: "Select a box to see terms and sources.",
   },
 };
 const preference = (key) => {
@@ -64,6 +111,8 @@ document.addEventListener("alpine:init", () =>
     loading: true,
     error: false,
     dollarAmount: 100,
+    governmentYear: null,
+    selectedGovernmentNode: null,
     sortKey: sortableColumns.includes(initialSort) ? initialSort : "year",
     ascending: sortParameters.get("order") === "asc",
     columns: [
@@ -80,6 +129,7 @@ document.addEventListener("alpine:init", () =>
     },
     async init() {
       this.syncPage();
+      if (sortParameters.get("credits") === "1") this.$nextTick(() => this.$refs.creditsDialog.showModal());
       await this.refreshData();
       this.onOnline = () => this.refreshData();
       this.onVisible = () => {
@@ -148,6 +198,81 @@ document.addEventListener("alpine:init", () =>
     portrait(person) {
       return portraits[person.en]?.src;
     },
+    primaryPerson(row) {
+      return primaryGovernmentPerson(row, leadership.terms);
+    },
+    get governmentEvent() {
+      return leadership.events[this.governmentYear] || null;
+    },
+    get portraitCredits() {
+      return Object.entries(portraits).map(([en, credit]) => ({
+        ...credit,
+        en,
+        fa: this.data?.years.flatMap(row => row.government).find(person => person.en === en)?.fa || en,
+      }));
+    },
+    get governmentTree() {
+      if (this.governmentYear === null) return [];
+      return governmentForYear(this.governmentYear, governmentData.records).map(node => ({
+        ...node,
+        label: this.lang === "fa" ? node.role : governmentData.roles[node.role],
+      }));
+    },
+    get governmentLeaders() {
+      return this.governmentTree.filter(node => ["رئیس‌جمهور", "نخست‌وزیر", "معاون اول"].includes(node.role));
+    },
+    get governmentMinisters() {
+      return this.governmentTree.filter(node => !["رئیس‌جمهور", "نخست‌وزیر", "رئیس کل بانک مرکزی"].includes(node.role))
+        .sort((a, b) => {
+          const priority = role => role === "وزیر امور اقتصادی و دارایی" ? 0 : role === "رئیس کل بانک مرکزی" ? 1 : 2;
+          return priority(a.role) - priority(b.role) || a.label.localeCompare(b.label, this.locale);
+        });
+    },
+    get centralBankTree() {
+      return this.governmentTree.find(node => node.role === "رئیس کل بانک مرکزی") || null;
+    },
+    get governmentPrimaryLeader() {
+      const row = this.data?.years.find(row => row.year === this.governmentYear);
+      return row ? this.primaryPerson(row) : null;
+    },
+    showGovernment(row) {
+      this.governmentYear = row.year;
+      this.selectedGovernmentNode = null;
+      this.$refs.governmentDialog.showModal();
+      this.$nextTick(() => this.renderGovernmentCharts());
+    },
+    async renderGovernmentCharts() {
+      const { renderOrganizationChart } = await import("./org-chart.js");
+      if (!this.$refs.governmentDialog.open || !this.governmentPrimaryLeader) return;
+      const person = this.governmentPrimaryLeader;
+      const root = {
+        label: person.en.includes("interim") ? this.t.primeMinister : this.t.president,
+        names: person[this.lang],
+        members: this.governmentLeaders.flatMap(node => node.members),
+      };
+      const select = node => { this.selectedGovernmentNode = node; };
+      renderOrganizationChart(this.$refs.cabinetChart, organizationNodes(root, this.governmentMinisters, this.lang), this.lang, select);
+      const bank = this.centralBankTree;
+      const bankGroups = bank ? bank.members.map(person => ({ label: bank.label, members: [person] })) : [];
+      renderOrganizationChart(this.$refs.bankChart, organizationNodes({ label: this.t.centralBank, names: "", members: bank?.members || [] }, bankGroups, this.lang), this.lang, select);
+    },
+    async controlChart(name, action) {
+      const { controlOrganizationChart } = await import("./org-chart.js");
+      controlOrganizationChart(name === "bank" ? this.$refs.bankChart : this.$refs.cabinetChart, action);
+    },
+    formatTermDate(value) {
+      if (this.lang === "fa") return value;
+      const words = {
+        "فروردین": "Farvardin", "اردیبهشت": "Ordibehesht", "خرداد": "Khordad",
+        "تیر": "Tir", "مرداد": "Mordad", "شهریور": "Shahrivar", "مهر": "Mehr",
+        "آبان": "Aban", "آذر": "Azar", "دی": "Dey", "بهمن": "Bahman", "اسفند": "Esfand",
+        "بهار": "Spring", "تابستان": "Summer", "پاییز": "Autumn", "زمستان": "Winter",
+        "در حال تصدی": "Present", "اکنون": "Present", "متصدی": "Present", "تاکنون": "Present",
+      };
+      let text = value.replace(/[۰-۹]/g, digit => "۰۱۲۳۴۵۶۷۸۹".indexOf(digit));
+      for (const [fa, en] of Object.entries(words)) text = text.replaceAll(fa, en);
+      return text;
+    },
     governmentName(row) {
       return row.government
         .map((person) => person[this.lang])
@@ -175,7 +300,7 @@ document.addEventListener("alpine:init", () =>
       });
     },
     formatYear(value) {
-      return new Intl.NumberFormat("fa-IR", { useGrouping: false }).format(
+      return new Intl.NumberFormat(this.locale, { useGrouping: false }).format(
         value,
       );
     },
@@ -183,7 +308,7 @@ document.addEventListener("alpine:init", () =>
       const amount = Number(this.dollarAmount);
       if (!Number.isFinite(amount) || amount < 0 || !price || price <= 0)
         return "—";
-      return new Intl.NumberFormat("fa-IR", {
+      return new Intl.NumberFormat(this.locale, {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       })
@@ -200,7 +325,7 @@ document.addEventListener("alpine:init", () =>
     formatPrice(value) {
       return value === null
         ? "—"
-        : new Intl.NumberFormat("fa-IR", {
+        : new Intl.NumberFormat(this.locale, {
             maximumFractionDigits: 0,
           }).format(value);
     },
@@ -213,7 +338,7 @@ document.addEventListener("alpine:init", () =>
       )
         return "—";
       return (
-        "(" + new Intl.NumberFormat("fa-IR", {
+        "(" + new Intl.NumberFormat(this.locale, {
           useGrouping: false,
           maximumFractionDigits: 2,
         }).format(row.maximum / row.minimum) + "×)"
@@ -221,7 +346,7 @@ document.addEventListener("alpine:init", () =>
     },
     formatDate(value) {
       return new Intl.DateTimeFormat(this.locale + "-u-ca-persian", {
-        numberingSystem: "arabext",
+        numberingSystem: this.lang === "fa" ? "arabext" : "latn",
         year: "numeric",
         month: "long",
         day: "numeric",

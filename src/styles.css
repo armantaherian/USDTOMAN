@@ -172,28 +172,28 @@ html[dir="rtl"] thead th[colspan="2"] {
   border-right: 1px solid var(--line);
 }
 
-.table-scroll {
+* {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--accent) 40%, var(--surface))
     var(--surface);
   scrollbar-gutter: stable;
 }
-.table-scroll::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 8px;
 }
-.table-scroll::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: var(--surface);
   border-radius: 8px;
 }
-.table-scroll::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: color-mix(in srgb, var(--accent) 40%, var(--surface));
   border: 2px solid var(--surface);
   border-radius: 8px;
 }
-.table-scroll::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
 }
-.table-scroll::-webkit-scrollbar-button {
+*::-webkit-scrollbar-button {
   display: none;
 }
 .government-portraits {
@@ -227,6 +227,71 @@ html[dir="rtl"] thead th[colspan="2"] {
 .portrait-person:focus-visible {
   z-index: 1;
 }
+.government-details {
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line);
+  background: var(--tint);
+  color: var(--accent);
+  box-shadow: 0 0 0 2px var(--surface);
+}
+.government-details svg {
+  width: 17px;
+  height: 17px;
+}
+.government-details-arrow {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: var(--surface);
+  font-size: 10px;
+  line-height: 12px;
+}
+.modal-dialog {
+  margin: auto;
+  padding: 0;
+  max-height: 85dvh;
+  overflow-y: auto;
+}
+.modal-dialog::backdrop {
+  background: rgb(16 23 19 / 55%);
+  backdrop-filter: blur(3px);
+}
+.org-node {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: Vazirmatn, Arial, sans-serif;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.org-node strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: 13px;
+  line-height: 20px;
+}
+.org-node div {
+  font-size: 13px;
+  line-height: 22px;
+}
+.org-root {
+  border-color: var(--accent);
+  background: var(--tint);
+}
+.org-chart .node:focus-visible .org-node {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
 .portrait-tooltip {
   position: fixed;
   inset: auto;
@@ -254,6 +319,14 @@ html[dir="rtl"] thead th[colspan="2"] {
   .portrait-person img {
     width: 20px;
     height: 20px;
+  }
+  .government-details {
+    width: 20px;
+    height: 20px;
+  }
+  .government-details svg {
+    width: 12px;
+    height: 12px;
   }
   tbody td:nth-child(2) {
     padding-inline: 2px;

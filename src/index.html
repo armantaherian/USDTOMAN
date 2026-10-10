@@ -92,7 +92,7 @@
   <body class="bg-page text-ink antialiased">
     <main
       x-data="dollarTable"
-      class="mx-auto flex h-dvh max-w-[980px] flex-col overflow-hidden px-3 py-4 sm:px-7 sm:py-6"
+      class="mx-auto flex h-dvh max-w-[880px] flex-col overflow-hidden px-3 py-4 sm:px-7 sm:py-6"
     >
       <header class="mb-5 flex shrink-0 items-center justify-between gap-4">
         <h1 class="text-lg font-semibold sm:text-2xl">
@@ -175,7 +175,7 @@
               <template x-for="column in columns" :key="column.key"
                 ><th
                   scope="col"
-                  :class="column.key==='government'?'w-[20%] sm:w-[16%]':column.key==='year'?'w-[14%] sm:w-[9%]':column.key==='maximum'?'w-[36%] sm:w-[27%]':'w-[30%] sm:w-[24%]'"
+                  :class="column.key==='government'?'w-[16%] sm:w-[12%]':column.key==='year'?'w-[14%] sm:w-[9%]':column.key==='maximum'?'w-[40%] sm:w-[29%]':'w-[30%] sm:w-[26%]'"
                   :aria-sort="column.key==='government'?null:sortKey===column.key?(ascending?'ascending':'descending'):'none'"
                 >
                   <span
@@ -252,7 +252,7 @@
               >
                 <td
                   dir="ltr"
-                  class="px-2 py-2 text-center font-medium tabular-nums sm:px-4 sm:py-2.5"
+                  class="px-2 py-2 text-center text-sm sm:text-base font-medium tabular-nums sm:px-4 sm:py-2.5"
                 >
                   <bdi dir="ltr" x-text="formatYear(row.year)"></bdi>
                 </td>
@@ -260,7 +260,7 @@
                   class="px-2 py-2 text-[10px] leading-4 text-muted sm:px-4 sm:py-2.5 sm:text-sm sm:leading-5"
                 >
                   <div class="government-portraits">
-                    <template x-for="person in row.government" :key="person.en">
+                    <template x-for="person in [primaryPerson(row)]" :key="person.en">
                       <button
                         type="button"
                         class="portrait-person"
@@ -289,7 +289,12 @@
                         <span x-ref="tooltip" popover="manual" class="portrait-tooltip" role="tooltip" :dir="lang==='fa'?'rtl':'ltr'" x-text="person[lang]"></span>
                       </button>
                     </template>
+                    <button type="button" class="portrait-person government-details" @click="showGovernment(row)" :aria-label="t.governmentTree + ' ' + formatYear(row.year)" :title="t.governmentTree + ' ' + formatYear(row.year)" aria-haspopup="dialog">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="2" width="8" height="5" rx="1"/><path d="M12 7v4M4 15v-4h16v4"/><rect x="1" y="15" width="6" height="5" rx="1"/><rect x="17" y="15" width="6" height="5" rx="1"/></svg>
+                      <span class="government-details-arrow" aria-hidden="true">↗</span>
+                    </button>
                   </div>
+
                 </td>
                 <td
                   dir="ltr"
@@ -334,10 +339,68 @@
           x-text="error?t.error:t.loading"
         ></p>
       </div>
+      <dialog x-ref="governmentDialog" class="modal-dialog w-[calc(100%-24px)] max-w-4xl rounded-2xl border border-line bg-surface text-ink shadow-xl" aria-labelledby="government-title" @click.self="$refs.governmentDialog.close()">
+        <div class="p-4 sm:p-6" :dir="lang==='fa'?'rtl':'ltr'">
+          <header class="flex items-center justify-between gap-4">
+            <h2 id="government-title" class="text-lg font-semibold" x-text="t.governmentTree + ' ' + formatYear(governmentYear)"></h2>
+            <button type="button" class="icon-button" @click="$refs.governmentDialog.close()" :aria-label="t.close" autofocus>✕</button>
+          </header>
+          <p class="mt-3 text-xs leading-6 text-muted" x-text="t.officeholdersNote"></p>
+          <p class="mt-2 text-[10px] text-muted" x-text="t.chartHint"></p>
+          <section class="mt-4">
+            <header class="flex items-center justify-between gap-3"><h3 class="text-sm font-medium text-accent" x-text="t.cabinet"></h3><div class="flex items-center gap-1" dir="ltr"><button type="button" class="icon-button" @click="controlChart('cabinet','out')" :aria-label="t.zoomOut">−</button><button type="button" class="icon-button" @click="controlChart('cabinet','in')" :aria-label="t.zoomIn">+</button><button type="button" class="source-link px-2 text-xs" @click="controlChart('cabinet','fit')" x-text="t.fitChart"></button></div></header>
+            <div id="cabinet-chart" x-ref="cabinetChart" class="org-chart mt-3 overflow-auto rounded-xl border border-line bg-page" dir="ltr" :aria-label="t.governmentTree + ' ' + formatYear(governmentYear)"></div>
+          </section>
+          <section class="mt-6 border-t border-line pt-4">
+            <header class="flex items-center justify-between gap-3"><h3 class="text-sm font-medium text-accent" x-text="t.centralBank"></h3><div class="flex items-center gap-1" dir="ltr"><button type="button" class="icon-button" @click="controlChart('bank','out')" :aria-label="t.zoomOut">−</button><button type="button" class="icon-button" @click="controlChart('bank','in')" :aria-label="t.zoomIn">+</button><button type="button" class="source-link px-2 text-xs" @click="controlChart('bank','fit')" x-text="t.fitChart"></button></div></header>
+            <div id="central-bank-chart" x-ref="bankChart" class="org-chart mt-3 overflow-auto rounded-xl border border-line bg-page" dir="ltr" :aria-label="t.centralBank"></div>
+          </section>
+          <template x-if="selectedGovernmentNode">
+            <section class="mt-4 rounded-xl border border-line bg-tint p-4">
+              <h3 class="text-sm font-medium" x-text="selectedGovernmentNode.label"></h3>
+              <template x-for="person in selectedGovernmentNode.members" :key="person.en + person.start">
+                <div class="mt-2 text-xs"><p x-text="person[lang]"></p><p class="mt-1 text-[10px] text-muted" x-text="formatTermDate(person.start) + ' — ' + formatTermDate(person.end)"></p><a class="source-link text-[10px]" :href="person.source" target="_blank" rel="noopener" x-text="t.historicalSource + ' ↗'"></a></div>
+              </template>
+            </section>
+          </template>
+          <template x-if="governmentEvent">
+            <details class="mt-5 border-t border-line pt-4">
+              <summary class="cursor-pointer text-sm font-medium text-accent" x-text="t.yearEvents"></summary>
+              <p class="mt-2 text-xs leading-6" x-text="governmentEvent[lang]"></p>
+              <p class="mt-2 text-[10px] text-muted" x-text="t.portraitRule"></p>
+              <a class="source-link text-[10px]" :href="governmentEvent.source" target="_blank" rel="noopener" x-text="t.historicalSource + ' ↗'"></a>
+              <template x-if="governmentEvent.electionSource">
+                <a class="source-link ms-3 text-[10px]" :href="governmentEvent.electionSource" target="_blank" rel="noopener" x-text="t.historicalSource + ' ↗'"></a>
+              </template>
+              <h4 class="mt-4 text-xs font-medium" x-text="t.otherLeaders"></h4>
+              <template x-for="node in governmentLeaders" :key="node.role">
+                <div class="mt-2 text-xs"><p class="text-muted" x-text="node.label"></p><p x-text="node.members.map(person => person[lang]).join(lang==='fa'?'، ':', ')"></p></div>
+              </template>
+            </details>
+          </template>
+        </div>
+      </dialog>
+      <dialog x-ref="creditsDialog" class="modal-dialog w-[calc(100%-24px)] max-w-lg rounded-2xl border border-line bg-surface text-ink shadow-xl" aria-labelledby="credits-title" @click.self="$refs.creditsDialog.close()">
+        <div class="p-4 sm:p-6" :dir="lang==='fa'?'rtl':'ltr'">
+          <header class="flex items-center justify-between gap-4">
+            <h2 id="credits-title" class="text-lg font-semibold" x-text="t.imageSources"></h2>
+            <button type="button" class="icon-button" @click="$refs.creditsDialog.close()" :aria-label="t.close" autofocus>✕</button>
+          </header>
+          <p class="mt-3 text-xs leading-6 text-muted" x-text="t.imageNote"></p>
+          <ul class="mt-4 divide-y divide-line">
+            <template x-for="credit in portraitCredits" :key="credit.en">
+              <li class="py-3">
+                <a class="source-link text-sm" :href="credit.source" target="_blank" rel="noopener" x-text="credit[lang] + ' ↗'"></a>
+                <p class="mt-1 text-[10px] text-muted"><span x-text="!credit.artist||credit.artist.startsWith('Unknown author')?t.unknownAuthor:credit.artist"></span> · <a :href="credit.licenseUrl||credit.source" target="_blank" rel="noopener" x-text="credit.license==='Public domain'?t.publicDomain:credit.license"></a></p>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </dialog>
       <footer
         class="mt-4 flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-3 text-[11px] text-muted"
       >
-        <a class="source-link" href="portrait-credits.html" x-text="lang==='fa'?'منبع تصاویر':'Portrait credits'">منبع تصاویر</a>
+        <button type="button" class="source-link" @click="$refs.creditsDialog.showModal()" aria-haspopup="dialog" x-text="t.imageSources">منبع تصاویر</button>
         <span x-text="t.source"></span
         ><a
           class="source-link"

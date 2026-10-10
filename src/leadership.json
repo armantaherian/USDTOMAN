@@ -1,0 +1,26 @@
+{
+  "terms": [
+    {"en":"Mehdi Bazargan (interim)","start":"1979-02-04","end":"1979-11-06","source":"https://en.wikipedia.org/wiki/Mehdi_Bazargan"},
+    {"en":"Abolhassan Banisadr","start":"1980-02-04","end":"1981-06-22"},
+    {"en":"Mohammad-Ali Rajai","start":"1981-08-02","end":"1981-08-30"},
+    {"en":"Ali Khamenei","start":"1981-10-09","end":"1989-08-16"},
+    {"en":"Akbar Hashemi Rafsanjani","start":"1989-08-16","end":"1997-08-03"},
+    {"en":"Mohammad Khatami","start":"1997-08-03","end":"2005-08-03"},
+    {"en":"Mahmoud Ahmadinejad","start":"2005-08-03","end":"2013-08-03"},
+    {"en":"Hassan Rouhani","start":"2013-08-03","end":"2021-08-03"},
+    {"en":"Ebrahim Raisi","start":"2021-08-03","end":"2024-05-19"},
+    {"en":"Mohammad Mokhber (acting)","start":"2024-05-20","end":"2024-07-28"},
+    {"en":"Masoud Pezeshkian","start":"2024-07-28","end":null}
+  ],
+  "termSource":"https://www.archontology.org/nations/iran/00_1979_td_pr.php",
+  "events": {
+    "1358":{"fa":"مهدی بازرگان در آبان از نخست‌وزیری دولت موقت استعفا داد و شورای انقلاب اداره دولت را بر عهده گرفت. ابوالحسن بنی‌صدر پس از انتخابات بهمن به عنوان نخستین رئیس‌جمهور آغاز به کار کرد.","en":"Mehdi Bazargan resigned as interim prime minister in November, and the Revolutionary Council took over. Following the January presidential election, Abolhassan Banisadr took office as the first president in February.","source":"https://en.wikipedia.org/wiki/Mehdi_Bazargan"},
+    "1360":{"fa":"بنی‌صدر در خرداد برکنار شد. رجایی در مرداد رئیس‌جمهور شد و در شهریور، همراه نخست‌وزیر محمدجواد باهنر، در انفجار دفتر نخست‌وزیری کشته شد. پس از دوره‌های موقت شورای ریاست‌جمهوری، خامنه‌ای در مهر ریاست‌جمهوری را بر عهده گرفت.","en":"Banisadr was removed in June. Rajai became president in August and was assassinated later that month alongside Prime Minister Mohammad Javad Bahonar. Interim presidential councils filled the gaps, and Khamenei took office in October.","source":"https://en.wikipedia.org/wiki/List_of_presidents_of_Iran"},
+    "1368":{"fa":"پس از اصلاح قانون اساسی و حذف سمت نخست‌وزیر، هاشمی رفسنجانی در مرداد جایگزین خامنه‌ای در ریاست‌جمهوری شد.","en":"Following constitutional changes that abolished the prime minister's office, Rafsanjani succeeded Khamenei as president in August.","source":"https://en.wikipedia.org/wiki/List_of_presidents_of_Iran"},
+    "1376":{"fa":"پس از انتخابات ریاست‌جمهوری، محمد خاتمی در مرداد جایگزین هاشمی رفسنجانی شد و دولت جدید تشکیل شد.","en":"Following the presidential election, Mohammad Khatami succeeded Rafsanjani in August and formed a new government.","source":"https://en.wikipedia.org/wiki/List_of_presidents_of_Iran"},
+    "1384":{"fa":"پس از انتخابات ریاست‌جمهوری، محمود احمدی‌نژاد در مرداد جایگزین محمد خاتمی شد.","en":"Following the presidential election, Mahmoud Ahmadinejad succeeded Mohammad Khatami in August.","source":"https://www.rferl.org/a/1060368.html"},
+    "1392":{"fa":"پس از انتخابات ریاست‌جمهوری، حسن روحانی در مرداد جایگزین محمود احمدی‌نژاد شد.","en":"Following the presidential election, Hassan Rouhani succeeded Mahmoud Ahmadinejad in August.","source":"https://iranprimer.usip.org/index.php/blog/2013/aug/04/inauguration-hassan-rouhani"},
+    "1400":{"fa":"پس از انتخابات ریاست‌جمهوری، ابراهیم رئیسی در مرداد جایگزین حسن روحانی شد.","en":"Following the presidential election, Ebrahim Raisi succeeded Hassan Rouhani in August.","source":"https://en.wikipedia.org/wiki/List_of_presidents_of_Iran"},
+    "1403":{"fa":"ابراهیم رئیسی و وزیر امور خارجه، حسین امیرعبداللهیان، در سانحه بالگرد در اردیبهشت جان باختند. محمد مخبر موقتاً سرپرست ریاست‌جمهوری شد. پس از انتخابات زودهنگام، مسعود پزشکیان در مرداد رئیس‌جمهور شد.","en":"President Ebrahim Raisi and Foreign Minister Hossein Amir Abdollahian died in a helicopter crash in May. Mohammad Mokhber became acting president. After an early election, Masoud Pezeshkian took office in July.","source":"https://apnews.com/article/92ce7ff3851e632f8d347e253d38143b","electionSource":"https://www.aljazeera.com/amp/news/2024/7/30/pezeshkian-sworn-in-as-irans-president-vows-to-work-to-remove-sanctions"}
+  }
+}

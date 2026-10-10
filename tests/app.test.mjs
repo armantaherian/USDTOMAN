@@ -3,14 +3,22 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 import { build } from "esbuild";
+import { governmentForYear, primaryGovernmentPerson, organizationNodes } from "../src/government.js";
 
 function createApp(saved = {}) {
   let factory;
   const portraits = JSON.parse(fs.readFileSync("src/portraits.json", "utf8"));
+  const governmentData = JSON.parse(fs.readFileSync("src/government.json", "utf8"));
+  const leadership = JSON.parse(fs.readFileSync("src/leadership.json", "utf8"));
   const root = { dataset: {} };
-  const source = fs.readFileSync("src/app.js", "utf8").replace(/^import portraits.*\n/, "");
+  const source = fs.readFileSync("src/app.js", "utf8").replace(/^import .*;\r?\n/gm, "");
   vm.runInNewContext(source, {
     portraits,
+    governmentData,
+    governmentForYear,
+    primaryGovernmentPerson,
+    organizationNodes,
+    leadership,
     localStorage: { getItem: (key) => saved[key], setItem: (key, value) => (saved[key] = value) },
     window: { location: { search: "" } },
     URLSearchParams,
@@ -28,6 +36,28 @@ test("multipliers use Persian digits, parentheses, and highest / lowest", () => 
   assert.equal(app.priceMultiplier({ minimum: 100, maximum: 225 }), "(۲٫۲۵×)");
   assert.equal(app.priceMultiplier({ minimum: 0, maximum: 200 }), "—");
   assert.equal(app.priceMultiplier({ minimum: null, maximum: 200 }), "—");
+});
+
+test("English mode uses English digits for years, prices, conversions, multipliers, and dates", () => {
+  const { app } = createApp({ language: "en" });
+  assert.equal(app.formatYear(1405), "1405");
+  assert.equal(app.formatPrice(146980), "146,980");
+  assert.equal(app.tomanValue(100), "10,000");
+  assert.equal(app.priceMultiplier({ minimum: 100, maximum: 225 }), "(2.25×)");
+  assert.ok(!/[۰-۹٠-٩]/.test(app.formatDate("2026-10-08")));
+});
+
+test("government tree shows finance transitions and the Central Bank governor for the selected year", () => {
+  const { app } = createApp({ language: "en" });
+  app.governmentYear = 1403;
+  const finance = app.governmentTree.find(node => node.role === "وزیر امور اقتصادی و دارایی");
+  assert.ok(finance.members.some(person => person.en === "Ehsan Khandozi"));
+  assert.ok(finance.members.some(person => person.en === "Abdolnaser Hemmati"));
+  const bank = app.governmentTree.find(node => node.role === "رئیس کل بانک مرکزی");
+  assert.equal(bank.members[0].en, "Mohammad Reza Farzin");
+  assert.ok(!app.governmentMinisters.some(node => node.role === "رئیس کل بانک مرکزی"));
+  assert.equal(app.centralBankTree.members[0].en, "Mohammad Reza Farzin");
+  assert.equal(app.formatTermDate("۳۱ مرداد ۱۴۰۳"), "31 Mordad 1403");
 });
 
 test("theme and language persist and restore page direction", () => {
@@ -74,5 +104,5 @@ test("compiled app runs as a classic script and registers the Alpine component",
     navigator: {},
   });
   assert.equal(typeof factory, "function");
-  assert.equal(factory().portrait({ en: "Hassan Rouhani" }), "portraits/hassan-rouhani.jpg");
+  assert.equal(factory().portrait({ en: "Hassan Rouhani" }), "portraits/hassan-rouhani-illustrated.png");
 });
