@@ -11,56 +11,63 @@
       "minimum": null,
       "maximum": null,
       "observations": 1,
-      "source": "legacy",
-      "resolution": "annual-only"
+      "source": "khabaronline",
+      "resolution": "annual-reference",
+      "referencePrice": 10
     },
     {
       "year": 1358,
       "minimum": null,
       "maximum": null,
       "observations": 1,
-      "source": "legacy",
-      "resolution": "annual-only"
+      "source": "khabaronline",
+      "resolution": "annual-reference",
+      "referencePrice": 14
     },
     {
       "year": 1359,
       "minimum": null,
       "maximum": null,
       "observations": 1,
-      "source": "legacy",
-      "resolution": "annual-only"
+      "source": "khabaronline",
+      "resolution": "annual-reference",
+      "referencePrice": 20
     },
     {
       "year": 1360,
       "minimum": null,
       "maximum": null,
       "observations": 1,
-      "source": "legacy",
-      "resolution": "annual-only"
+      "source": "khabaronline",
+      "resolution": "annual-reference",
+      "referencePrice": 27
     },
     {
       "year": 1361,
       "minimum": null,
       "maximum": null,
       "observations": 1,
-      "source": "legacy",
-      "resolution": "annual-only"
+      "source": "khabaronline",
+      "resolution": "annual-reference",
+      "referencePrice": 35
     },
     {
       "year": 1362,
       "minimum": null,
       "maximum": null,
       "observations": 1,
-      "source": "legacy",
-      "resolution": "annual-only"
+      "source": "khabaronline",
+      "resolution": "annual-reference",
+      "referencePrice": 45
     },
     {
       "year": 1363,
       "minimum": null,
       "maximum": null,
       "observations": 1,
-      "source": "legacy",
-      "resolution": "annual-only"
+      "source": "khabaronline",
+      "resolution": "annual-reference",
+      "referencePrice": 58
     },
     {
       "year": 1364,
@@ -386,10 +393,12 @@
       "originalUnit": "toman",
       "coverage": "1364–1390; monthly averages through 1379, daily records from 1380"
     },
-    "legacy": {
-      "name": "m-ahmadi/dollar",
-      "url": "https://github.com/m-ahmadi/dollar",
-      "coverage": "1357–1363; annual-only observations, extrema unavailable"
+    "khabaronline": {
+      "name": "KhabarOnline",
+      "url": "https://www.khabaronline.ir/news/189536",
+      "coverage": "1357–1363 reference rates only; annual extrema are not reported",
+      "originalUnit": "toman",
+      "articleDate": "1390/09/24"
     }
   }
 }
