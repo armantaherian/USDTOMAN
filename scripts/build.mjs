@@ -24,7 +24,7 @@ const staticRows = [...data.years]
     const government = row.government.map((person) => person.fa).join("، ");
     const price = (value) =>
       value == null ? "—" : priceFormatter.format(value);
-    return `<tr class="table-row"><td class="px-2 py-3 sm:px-4">${yearFormatter.format(row.year)}</td><td class="px-2 py-3 text-muted sm:px-4">${escapeHtml(government)}</td><td class="px-2 py-3 sm:px-4">${price(row.minimum)}</td><td class="px-2 py-3 text-accent sm:px-4">${price(row.maximum)}</td><td class="px-2 py-3 text-xs">کمترین: ${row.maximum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 2 }).format(1000000 / row.maximum) : "—"} $<br>بیشترین: ${row.minimum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 2 }).format(1000000 / row.minimum) : "—"} $</td></tr>`;
+    return `<tr class="table-row"><td class="px-2 py-3 sm:px-4">${yearFormatter.format(row.year)}</td><td class="px-2 py-3 text-muted sm:px-4">${escapeHtml(government)}</td><td class="px-2 py-3 sm:px-4">${price(row.minimum)}</td><td class="px-2 py-3 text-accent sm:px-4">${price(row.maximum)}</td><td class="px-2 py-3 text-xs"><span dir="ltr" class="block whitespace-nowrap text-left">${row.maximum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 2 }).format(1000000 / row.maximum) : "—"} – ${row.minimum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 2 }).format(1000000 / row.minimum) : "—"} $</span></td></tr>`;
   })
   .join("\n");
 const html = fs
