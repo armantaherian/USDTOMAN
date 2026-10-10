@@ -144,7 +144,13 @@ th button {
 tbody td:nth-child(5),
 tbody td:nth-child(6),
 thead th[colspan="2"] {
-  border-inline-start: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+html[dir="rtl"] tbody td:nth-child(5),
+html[dir="rtl"] tbody td:nth-child(6),
+html[dir="rtl"] thead th[colspan="2"] {
+  border-left: 0;
+  border-right: 1px solid var(--line);
 }
 
 .table-scroll {
