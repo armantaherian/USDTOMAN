@@ -14,6 +14,18 @@
           localStorage.getItem("theme") === "dark" ? "dark" : "light";
       } catch {}
     </script>
+    <script id="analytics">
+      if (window.location.hostname === "ohmydevops.github.io") {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-7TJ3PRZWVX");
+        const tag = document.createElement("script");
+        tag.async = true;
+        tag.src = "https://www.googletagmanager.com/gtag/js?id=G-7TJ3PRZWVX";
+        document.head.appendChild(tag);
+      }
+    </script>
     <title>قیمت سالانه دلار در ایران؛ کمترین و بیشترین نرخ | USD / Toman</title>
     <meta
       name="description"
