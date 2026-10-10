@@ -134,7 +134,7 @@
         x-show="data"
         x-text="data?t.coverage+' '+formatDate(data.latestDate):''"
       ></p>
-      <div class="overflow-x-auto rounded-xl border border-line bg-surface">
+      <div class="overflow-hidden rounded-xl border border-line bg-surface">
         <table
           class="w-full table-fixed border-collapse text-start text-xs sm:text-sm"
         >
@@ -143,7 +143,7 @@
               <template x-for="column in columns" :key="column.key"
                 ><th
                   scope="col"
-                  :class="column.key==='government'?'w-[34%]':column.key==='year'?'w-[16%]':'w-[25%]'"
+                  :class="column.key==='government'?'w-[50%]':column.key==='year'?'w-[12%]':'w-[19%]'"
                   :aria-sort="column.key==='government'?null:sortKey===column.key?(ascending?'ascending':'descending'):'none'"
                 >
                   <span
@@ -183,11 +183,9 @@
                   class="px-2 py-3 font-medium tabular-nums sm:px-4 sm:py-3.5"
                   x-text="formatYear(row.year)"
                 ></td>
-                <td
-                  class="px-2 py-3 government-cell text-[9px] leading-5 text-muted sm:px-4 sm:py-3.5"
-                >
+                <td class="px-2 py-3 leading-5 text-muted sm:px-4 sm:py-3.5">
                   <span
-                    class="block overflow-x-auto whitespace-nowrap"
+                    class="block whitespace-normal break-words"
                     x-text="row.government.map(person=>person[lang]).join(lang==='fa'?'، ':', ')"
                   ></span>
                 </td>
