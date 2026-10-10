@@ -340,14 +340,14 @@
         ></p>
       </div>
       <dialog x-ref="governmentDialog" class="modal-dialog w-[calc(100%-24px)] max-w-4xl rounded-2xl border border-line bg-surface text-ink shadow-xl" aria-labelledby="government-title" @click.self="$refs.governmentDialog.close()">
-        <div class="p-4 sm:p-6" :dir="lang==='fa'?'rtl':'ltr'">
+        <div class="p-3 sm:p-4" :dir="lang==='fa'?'rtl':'ltr'">
           <header class="flex items-center justify-between gap-4">
             <h2 id="government-title" class="text-lg font-semibold" x-text="t.governmentTree + ' ' + formatYear(governmentYear)"></h2>
             <button type="button" class="icon-button" @click="$refs.governmentDialog.close()" :aria-label="t.close" autofocus>✕</button>
           </header>
-          <p class="mt-3 text-xs leading-6 text-muted" x-text="t.officeholdersNote"></p>
+          <p class="mt-2 text-[9px] leading-4 text-muted" x-text="t.officeholdersNote"></p>
           <p class="mt-2 text-[10px] text-muted" x-text="t.personHint"></p>
-          <div class="mt-4 grid items-start gap-5 md:grid-cols-[260px_minmax(0,1fr)]" dir="ltr">
+          <div class="mt-3 grid items-start gap-3 md:grid-cols-[220px_minmax(0,1fr)]" dir="ltr">
             <aside class="order-2 rounded-xl border border-line bg-tint p-4 md:sticky md:top-0 md:order-1" :dir="lang==='fa'?'rtl':'ltr'" aria-live="polite">
               <template x-if="selectedGovernmentPerson">
                 <div>
@@ -365,13 +365,13 @@
                 <h3 class="border-b border-line pb-2 text-sm font-semibold text-accent" x-text="t.cabinet"></h3>
                 <ul class="divide-y divide-line">
                   <template x-for="node in [...governmentLeaders.filter(node => node.role!=='معاون اول'), ...governmentMinisters]" :key="node.role">
-                    <li class="py-2">
-                      <h4 class="text-[10px] font-medium text-muted" x-text="node.label"></h4>
-                      <div class="mt-1 flex flex-wrap gap-1">
-                        <template x-for="person in node.members" :key="person.en">
-                          <button type="button" class="rounded px-2 py-1 text-start text-xs transition-colors hover:bg-tint focus-visible:outline-accent" :class="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role?'bg-tint text-accent':'text-ink'" :aria-pressed="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role" @click="selectGovernmentPerson(person)" x-text="person[lang]"></button>
-                        </template>
-                      </div>
+                    <li>
+                      <template x-for="person in node.members" :key="person.en">
+                        <button type="button" class="grid w-full grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] items-center gap-3 rounded px-2 py-2 text-start transition-colors hover:bg-tint focus-visible:outline-accent" :class="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role?'bg-tint text-accent':'text-ink'" :aria-pressed="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role" @click="selectGovernmentPerson(person)">
+                          <span class="text-[10px] leading-4 text-muted" x-text="node.label"></span>
+                          <span class="text-xs leading-4" x-text="person[lang]"></span>
+                        </button>
+                      </template>
                     </li>
                   </template>
                 </ul>
@@ -380,13 +380,13 @@
                 <h3 class="border-b border-line pb-2 text-sm font-semibold text-accent" x-text="t.centralBank"></h3>
                 <ul class="divide-y divide-line">
                   <template x-for="node in centralBankTree ? [centralBankTree] : []" :key="node.role">
-                    <li class="py-2">
-                      <h4 class="text-[10px] font-medium text-muted" x-text="node.label"></h4>
-                      <div class="mt-1 flex flex-wrap gap-1">
-                        <template x-for="person in node.members" :key="person.en">
-                          <button type="button" class="rounded px-2 py-1 text-start text-xs transition-colors hover:bg-tint focus-visible:outline-accent" :class="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role?'bg-tint text-accent':'text-ink'" :aria-pressed="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role" @click="selectGovernmentPerson(person)" x-text="person[lang]"></button>
-                        </template>
-                      </div>
+                    <li>
+                      <template x-for="person in node.members" :key="person.en">
+                        <button type="button" class="grid w-full grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] items-center gap-3 rounded px-2 py-2 text-start transition-colors hover:bg-tint focus-visible:outline-accent" :class="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role?'bg-tint text-accent':'text-ink'" :aria-pressed="selectedGovernmentPerson?.en===person.en&amp;&amp;selectedGovernmentPerson?.role===person.role" @click="selectGovernmentPerson(person)">
+                          <span class="text-[10px] leading-4 text-muted" x-text="node.label"></span>
+                          <span class="text-xs leading-4" x-text="person[lang]"></span>
+                        </button>
+                      </template>
                     </li>
                   </template>
                 </ul>
