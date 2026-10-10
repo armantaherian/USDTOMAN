@@ -7,6 +7,8 @@ import { createHash } from "node:crypto";
 // Keep editable source separate from the files served to visitors.
 fs.mkdirSync("dist", { recursive: true });
 fs.cpSync("src/assets/fonts", "dist/fonts", { recursive: true });
+fs.cpSync("src/assets/portraits", "dist/portraits", { recursive: true });
+const portraits = JSON.parse(fs.readFileSync("src/portraits.json", "utf8"));
 const data = JSON.parse(fs.readFileSync("src/data.json", "utf8"));
 const escapeHtml = (value) =>
   String(value).replace(
@@ -16,6 +18,11 @@ const escapeHtml = (value) =>
         character
       ],
   );
+const creditRows = Object.entries(portraits).map(([name, p]) => {
+  const person = data.years.flatMap(row => row.government).find(person => person.en === name);
+  return `<li><a href="${escapeHtml(p.source)}"><span x-text="lang==='fa'?${escapeHtml(JSON.stringify(person.fa))}:${escapeHtml(JSON.stringify(name))}">${escapeHtml(person.fa)}</span></a> — ${p.artist || "Unknown author / پدیدآورنده نامشخص"} — ${p.licenseUrl ? `<a href="${escapeHtml(p.licenseUrl)}">${escapeHtml(p.license)}</a>` : "Public domain / مالکیت عمومی"}</li>`;
+}).join("");
+fs.writeFileSync("dist/portrait-credits.html", `<!doctype html><html lang="fa" dir="rtl"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>منبع تصاویر / Portrait credits</title><link rel="stylesheet" href="style.css"><script defer src="alpine.min.js"></script><body class="bg-page text-ink p-6" x-data="{lang: 'fa', init(){try{this.lang=localStorage.getItem('language')==='en'?'en':'fa'}catch{};document.documentElement.lang=this.lang;document.documentElement.dir=this.lang==='fa'?'rtl':'ltr';try{document.documentElement.dataset.theme=localStorage.getItem('theme')}catch{}}}"><h1 class="text-xl mb-4" x-text="lang==='fa'?'منبع تصاویر':'Portrait credits'">منبع تصاویر</h1><p class="mb-4" x-text="lang==='fa'?'عکس‌ها از ویکی‌مدیا کامانز؛ برای نمایش به شکل دایره برش خورده‌اند.':'Wikimedia Commons photographs, cropped into circles for display.'"></p><ul class="space-y-3">${creditRows}</ul><a class="source-link block mt-6" href="./" x-text="lang==='fa'?'بازگشت':'Back'">بازگشت</a></body></html>`);
 const priceFormatter = new Intl.NumberFormat("fa", {
   maximumFractionDigits: 0,
 });
@@ -23,10 +30,20 @@ const yearFormatter = new Intl.NumberFormat("fa", { useGrouping: false });
 const staticRows = [...data.years]
   .sort((first, second) => second.year - first.year)
   .map((row) => {
-    const government = row.government.map((person) => person.fa).join("، ");
+    const government = row.government.map((person) => `<button type="button" class="portrait-person" aria-label="${escapeHtml(person.fa)}" title="${escapeHtml(person.fa)}"><img src="${portraits[person.en].src}" alt="${escapeHtml(person.fa)}" width="40" height="40" loading="lazy"><span class="portrait-tooltip" role="tooltip">${escapeHtml(person.fa)}</span></button>`).join("");
     const price = (value) =>
       value == null ? "—" : priceFormatter.format(value);
-    return `<tr class="table-row"><td class="font-medium px-2 py-3 sm:px-4"><bdi dir="ltr">${yearFormatter.format(row.year)}</bdi></td><td class="font-medium px-2 py-3 text-muted sm:px-4">${escapeHtml(government)}</td><td class="font-medium px-2 py-3 sm:px-4"><bdi dir="ltr">${price(row.minimum)}</bdi></td><td class="font-medium px-2 py-3 text-accent sm:px-4"><bdi dir="ltr">${price(row.maximum)}</bdi></td><td class="font-medium px-1 py-3 text-center text-xs"><span dir="ltr">${row.maximum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 0 }).format(100 * row.minimum).replace("٫", ".") : "—"}</span></td><td class="font-medium px-1 py-3 text-center text-xs"><span dir="ltr">${row.minimum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 0 }).format(100 * row.maximum).replace("٫", ".") : "—"}</span></td></tr>`;
+    const multiplier =
+      Number.isFinite(row.minimum) &&
+      Number.isFinite(row.maximum) &&
+      row.minimum > 0 &&
+      row.maximum >= row.minimum
+        ? "(" + new Intl.NumberFormat("fa-IR", {
+            useGrouping: false,
+            maximumFractionDigits: 2,
+          }).format(row.maximum / row.minimum) + "×)"
+        : "—";
+    return `<tr class="table-row"><td class="font-medium px-2 py-2 sm:px-4"><bdi dir="ltr">${yearFormatter.format(row.year)}</bdi></td><td class="font-medium px-2 py-2 text-muted sm:px-4"><div class="government-portraits">${government}</div></td><td class="font-medium px-2 py-2 sm:px-4"><bdi dir="ltr">${price(row.minimum)}</bdi></td><td class="font-medium px-2 py-2 text-accent sm:px-4"><bdi dir="ltr">${price(row.maximum)}</bdi><span dir="ltr" class="ms-1 inline-flex items-baseline whitespace-nowrap text-[10px] sm:text-xs font-normal text-muted" title="نسبت بیشترین به کمترین قیمت در این سال">${multiplier === "—" ? "—" : `${multiplier.split("×")[0]}<span class="text-base sm:text-lg font-medium leading-none">↑</span>)`}</span></td><td class="font-medium px-1 py-2 text-center text-xs"><span dir="ltr">${row.maximum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 0 }).format(100 * row.minimum).replace("٫", ".") : "—"}</span></td><td class="font-medium px-1 py-2 text-center text-xs"><span dir="ltr">${row.minimum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 0 }).format(100 * row.maximum).replace("٫", ".") : "—"}</span></td></tr>`;
   })
   .join("\n");
 const html = fs
@@ -61,6 +78,8 @@ await sharp("src/assets/og-image-2.png")
 fs.copyFileSync("node_modules/alpinejs/dist/cdn.min.js", "dist/alpine.min.js");
 
 await build({
+  bundle: true,
+  format: "iife",
   entryPoints: ["src/app.js"],
   outfile: "dist/app.js",
   minify: true,
@@ -82,6 +101,8 @@ const result = spawnSync(
 
 if (result.status !== 0) process.exit(result.status ?? 1);
 const assets = [
+  "portrait-credits.html",
+  ...Object.values(portraits).map((portrait) => portrait.src),
   "index.html",
   "app.js",
   "alpine.min.js",

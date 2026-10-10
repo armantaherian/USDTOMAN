@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "node --test --test-isolation=none tests/*.test.mjs",
     "update-data": "node scripts/update-data.mjs",
     "build": "node scripts/build.mjs",
     "dev": "npm run build && node scripts/serve.mjs",

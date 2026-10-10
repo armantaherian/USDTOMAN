@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
+    <script>
+      try {
+        const root = document.documentElement;
+        const language = localStorage.getItem("language") === "en" ? "en" : "fa";
+        root.lang = language;
+        root.dir = language === "fa" ? "rtl" : "ltr";
+        root.dataset.theme =
+          localStorage.getItem("theme") === "dark" ? "dark" : "light";
+      } catch {}
+    </script>
     <title>قیمت سالانه دلار در ایران؛ کمترین و بیشترین نرخ | USD / Toman</title>
     <meta
       name="description"
@@ -165,7 +175,7 @@
               <template x-for="column in columns" :key="column.key"
                 ><th
                   scope="col"
-                  :class="column.key==='government'?'w-[42%] sm:w-[37%]':column.key==='year'?'w-[14%] sm:w-[9%]':'w-[22%] sm:w-[15%]'"
+                  :class="column.key==='government'?'w-[20%] sm:w-[16%]':column.key==='year'?'w-[14%] sm:w-[9%]':column.key==='maximum'?'w-[36%] sm:w-[27%]':'w-[30%] sm:w-[24%]'"
                   :aria-sort="column.key==='government'?null:sortKey===column.key?(ascending?'ascending':'descending'):'none'"
                 >
                   <span
@@ -242,48 +252,75 @@
               >
                 <td
                   dir="ltr"
-                  class="px-2 py-3 text-center font-medium tabular-nums sm:px-4 sm:py-3.5"
+                  class="px-2 py-2 text-center font-medium tabular-nums sm:px-4 sm:py-2.5"
                 >
                   <bdi dir="ltr" x-text="formatYear(row.year)"></bdi>
                 </td>
                 <td
-                  class="px-2 py-3 text-[10px] leading-4 text-muted sm:px-4 sm:py-3.5 sm:text-sm sm:leading-5"
-                  x-data="{ expanded: false }"
+                  class="px-2 py-2 text-[10px] leading-4 text-muted sm:px-4 sm:py-2.5 sm:text-sm sm:leading-5"
                 >
-                  <button
-                    class="block w-full text-start sm:hidden"
-                    :class="expanded?'whitespace-normal break-words':'truncate'"
-                    @click="expanded = !expanded"
-                    :aria-expanded="expanded"
-                    :aria-label="governmentName(row)"
-                    x-text="expanded || governmentName(row).length <= 24 ? governmentName(row) : governmentName(row).slice(0,24) + '…'"
-                  ></button>
-                  <span
-                    class="hidden whitespace-normal break-words sm:block"
-                    x-text="governmentName(row)"
-                  ></span>
+                  <div class="government-portraits">
+                    <template x-for="person in row.government" :key="person.en">
+                      <button
+                        type="button"
+                        class="portrait-person"
+                        :aria-label="person[lang]"
+                        x-data="{
+                          open() {
+                            const tip = $refs.tooltip;
+                            tip.showPopover();
+                            const rect = $el.getBoundingClientRect();
+                            const width = tip.offsetWidth;
+                            const height = tip.offsetHeight;
+                            tip.style.left = Math.max(8, Math.min(rect.left + rect.width / 2 - width / 2, window.innerWidth - width - 8)) + 'px';
+                            tip.style.top = (rect.top - height - 8 >= 8 ? rect.top - height - 8 : rect.bottom + 8) + 'px';
+                          },
+                          close() { $refs.tooltip.hidePopover(); }
+                        }"
+                        @mouseenter="open()"
+                        @mouseleave="close()"
+                        @focus="open()"
+                        @blur="close()"
+                        @keydown.escape="close()"
+                        @scroll.window.capture="close()"
+                        @resize.window="close()"
+                      >
+                        <img :src="portrait(person)" :alt="person[lang]" width="40" height="40" loading="lazy" />
+                        <span x-ref="tooltip" popover="manual" class="portrait-tooltip" role="tooltip" :dir="lang==='fa'?'rtl':'ltr'" x-text="person[lang]"></span>
+                      </button>
+                    </template>
+                  </div>
                 </td>
                 <td
                   dir="ltr"
-                  class="px-2 py-3 text-center font-medium tabular-nums sm:px-4 sm:py-3.5"
+                  class="px-2 py-2 text-center font-medium tabular-nums sm:px-4 sm:py-2.5"
                 >
                   <bdi dir="ltr" x-text="formatPrice(row.minimum)"></bdi>
                 </td>
                 <td
                   dir="ltr"
-                  class="px-2 py-3 text-center text-accent font-medium tabular-nums sm:px-4 sm:py-3.5"
+                  class="px-2 py-2 text-center text-accent font-medium tabular-nums sm:px-4 sm:py-2.5"
                 >
                   <bdi dir="ltr" x-text="formatPrice(row.maximum)"></bdi>
+                  <span
+                    class="ms-1 inline-flex items-baseline whitespace-nowrap text-[10px] sm:text-xs font-normal text-muted"
+                    :title="t.multiplier"
+                    :aria-label="t.multiplier + ': ' + priceMultiplier(row).replace('×', '↑')"
+                  >
+                    <span x-text="priceMultiplier(row)==='—'?'—':priceMultiplier(row).split('×')[0]"></span>
+                    <span class="text-base sm:text-lg font-medium leading-none" x-show="priceMultiplier(row)!=='—'" aria-hidden="true">↑</span>
+                    <span x-show="priceMultiplier(row)!=='—'" aria-hidden="true">)</span>
+                  </span>
                 </td>
                 <td
                   dir="ltr"
-                  class="hidden px-0.5 py-3 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
+                  class="hidden px-0.5 py-2 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
                 >
                   <bdi dir="ltr" x-text="tomanValue(row.minimum)"></bdi>
                 </td>
                 <td
                   dir="ltr"
-                  class="hidden px-0.5 py-3 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
+                  class="hidden px-0.5 py-2 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
                 >
                   <bdi dir="ltr" x-text="tomanValue(row.maximum)"></bdi>
                 </td></tr
@@ -300,6 +337,7 @@
       <footer
         class="mt-4 flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-3 text-[11px] text-muted"
       >
+        <a class="source-link" href="portrait-credits.html" x-text="lang==='fa'?'منبع تصاویر':'Portrait credits'">منبع تصاویر</a>
         <span x-text="t.source"></span
         ><a
           class="source-link"

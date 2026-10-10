@@ -1,10 +1,68 @@
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
+import { spawn } from "node:child_process";
 const root = path.resolve("dist");
+const clients = new Set();
+let revision = 0;
+let building = false;
+let pending = false;
+let debounce;
+function rebuild() {
+  if (building) {
+    pending = true;
+    return;
+  }
+  building = true;
+  const child = spawn(process.execPath, ["scripts/build.mjs"], {
+    stdio: "inherit",
+  });
+  child.on("error", (error) => console.error("Build failed:", error.message));
+  child.on("close", (code) => {
+    building = false;
+    if (code === 0) {
+      revision++;
+      for (const client of clients) client.write(`data: ${revision}\n\n`);
+      console.log("Rebuilt; reloading browser.");
+    }
+    if (pending) {
+      pending = false;
+      rebuild();
+    }
+  });
+}
+for (const directory of ["src", "scripts"]) {
+  fs.watch(directory, { recursive: true }, () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(rebuild, 150);
+  });
+}
+const reloadScript = `<script>
+  const updates = new EventSource('/__dev_events');
+  let revision;
+  updates.onmessage = (event) => {
+    if (revision !== undefined && revision !== event.data) location.reload();
+    revision = event.data;
+  };
+</script>`;
 http
   .createServer((req, res) => {
     const name = req.url.split("?")[0];
+    if (name === "/__dev_events") {
+      res.writeHead(200, {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-store",
+        Connection: "keep-alive",
+      });
+      res.write(`data: ${revision}\n\n`);
+      clients.add(res);
+      const heartbeat = setInterval(() => res.write(": keepalive\n\n"), 15000);
+      req.on("close", () => {
+        clearInterval(heartbeat);
+        clients.delete(res);
+      });
+      return;
+    }
     const file = path.resolve(
       root,
       "." + (name === "/" ? "/index.html" : name),
@@ -27,6 +85,9 @@ http
           ".json": "application/json",
         }[path.extname(file)] || "application/octet-stream",
       );
+      res.setHeader("Cache-Control", "no-store");
+      if (path.extname(file) === ".html")
+        body = body.toString().replace("</body>", reloadScript + "</body>");
       res.end(body);
     });
   })

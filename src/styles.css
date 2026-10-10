@@ -196,3 +196,66 @@ html[dir="rtl"] thead th[colspan="2"] {
 .table-scroll::-webkit-scrollbar-button {
   display: none;
 }
+.government-portraits {
+  direction: ltr;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+.portrait-person {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  border-radius: 50%;
+  outline-offset: 3px;
+}
+.portrait-person img {
+  box-shadow: 0 0 0 2px var(--surface);
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}
+.portrait-person + .portrait-person {
+  margin-left: -10px;
+}
+.portrait-person:hover,
+.portrait-person:focus-visible {
+  z-index: 1;
+}
+.portrait-tooltip {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  width: max-content;
+  max-width: 220px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--surface);
+  font-size: 11px;
+  pointer-events: none;
+}
+.portrait-tooltip:popover-open {
+  display: block;
+}
+@media (max-width: 639px) {
+  .government-portraits {
+    gap: 0;
+  }
+  .portrait-person + .portrait-person {
+    margin-left: -5px;
+  }
+  .portrait-person img {
+    width: 20px;
+    height: 20px;
+  }
+  tbody td:nth-child(2) {
+    padding-inline: 2px;
+  }
+}

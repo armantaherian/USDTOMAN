@@ -1,0 +1,76 @@
+{
+  "Mehdi Bazargan (interim)": {
+    "src": "portraits/mehdi-bazargan.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Mehdi_Bazargan_Portrait.jpg",
+    "artist": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+    "license": "Public domain"
+  },
+  "Abolhassan Banisadr": {
+    "src": "portraits/abolhassan-banisadr.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Abolhassan_Banisadr_portrait_1980_2.jpg",
+    "artist": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+    "license": "Public domain"
+  },
+  "Mohammad-Ali Rajai": {
+    "src": "portraits/mohammad-ali-rajai.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_Mohammad-Ali_Rajai_Edit.jpg",
+    "artist": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+    "license": "Public domain"
+  },
+  "Ali Khamenei": {
+    "src": "portraits/ali-khamenei.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ali_Khamenei_Nowruz_message_official_portrait_1397_02_(3_x_4_cropped).jpg",
+    "artist": "khamenei.ir",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "Akbar Hashemi Rafsanjani": {
+    "src": "portraits/akbar-hashemi-rafsanjani.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Akbar_Hashemi_Rafsanjani_by_Fars_01_(cropped).jpg",
+    "artist": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Fars_News_Agency\" class=\"extiw\" title=\"w:en:Fars News Agency\"><span title=\"Iranian news agency\">Fars News Agency</span></a>\n</bdi>",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "Mohammad Khatami": {
+    "src": "portraits/mohammad-khatami.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Funeral_of_Kamal_Kharrazi_11_Avash_(cropped).webp",
+    "artist": "Mohammadreza Abbasi",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "Mahmoud Ahmadinejad": {
+    "src": "portraits/mahmoud-ahmadinejad.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Mahmoud_Ahmedinejad_July_2026_(cropped).jpg",
+    "artist": "<a rel=\"nofollow\" class=\"external free\" href=\"https://tasnimnews.ir\">https://tasnimnews.ir</a>",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "Masoud Pezeshkian": {
+    "src": "portraits/masoud-pezeshkian.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Pezeshkian_(cropped).jpg",
+    "artist": "Alireza Masoumi",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "Hassan Rouhani": {
+    "src": "portraits/hassan-rouhani.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Hassan_Rouani_2017_portrait.jpg",
+    "artist": "Khamenei.ir",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "Ebrahim Raisi": {
+    "src": "portraits/ebrahim-raisi.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ebrahim_Raisi_in_2024_(3x4_cropped).jpg",
+    "artist": "<table class=\"layouttemplate sourcetemplate\" style=\"width:100%; clear:both; text-align:center; margin:0.5em auto; box-sizing: border-box; padding: 0; border-spacing: 8px; background-color: var(--background-color-neutral-subtle, #f6f7f5); color: var(--color-base, #202122); border: var(--border-subtle, 1px solid #555555);\" dir=\"ltr\" lang=\"en\">\n<tbody><tr>\n<td style=\"text-align:center;\"><figure class=\"mw-halign-left mw-image-border\" typeof=\"mw:File\"><a href=\"//commons.wikimedia.org/wiki/File:The_Presidential_Press_and_Information_Office_of_Azerbaijan_(official_logo).png\" class=\"mw-file-description\"><img src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/The_Presidential_Press_and_Information_Office_of_Azerbaijan_%28official_logo%29.png/120px-The_Presidential_Press_and_Information_Office_of_Azerbaijan_%28official_logo%29.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"70\" height=\"52\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/The_Presidential_Press_and_Information_Office_of_Azerbaijan_%28official_logo%29.png/250px-The_Presidential_Press_and_Information_Office_of_Azerbaijan_%28official_logo%29.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"395\" data-file-height=\"295\"></a><figcaption></figcaption></figure>\n</td>\n<td><b>Press Service of the President of the Republic of Azerbaijan</b>\n</td></tr></tbody></table>",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "Mohammad Mokhber (acting)": {
+    "src": "portraits/mohammad-mokhber.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Mohammad_Mokhber_2026.jpg",
+    "artist": "khamenei.ir",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  }
+}

@@ -1,3 +1,5 @@
+import portraits from "./portraits.json";
+
 const translations = {
   fa: {
     title: "قیمت سالانه دلار در ایران",
@@ -7,6 +9,7 @@ const translations = {
     government: "دولت",
     minimum: "کمترین",
     maximum: "بیشترین",
+    multiplier: "نسبت بیشترین به کمترین قیمت در این سال",
     unit: "تومان",
     conversion: "ارزش دلاری",
     amount: "مبلغ به دلار",
@@ -25,6 +28,7 @@ const translations = {
     government: "Government",
     minimum: "Minimum",
     maximum: "Maximum",
+    multiplier: "Highest / lowest price this year",
     unit: "toman",
     conversion: "Dollar value",
     amount: "Amount in dollars",
@@ -141,6 +145,9 @@ document.addEventListener("alpine:init", () =>
       url.searchParams.set("order", this.ascending ? "asc" : "desc");
       window.history.replaceState(null, "", url);
     },
+    portrait(person) {
+      return portraits[person.en]?.src;
+    },
     governmentName(row) {
       return row.government
         .map((person) => person[this.lang])
@@ -196,6 +203,21 @@ document.addEventListener("alpine:init", () =>
         : new Intl.NumberFormat("fa-IR", {
             maximumFractionDigits: 0,
           }).format(value);
+    },
+    priceMultiplier(row) {
+      if (
+        !Number.isFinite(row.minimum) ||
+        !Number.isFinite(row.maximum) ||
+        row.minimum <= 0 ||
+        row.maximum < row.minimum
+      )
+        return "—";
+      return (
+        "(" + new Intl.NumberFormat("fa-IR", {
+          useGrouping: false,
+          maximumFractionDigits: 2,
+        }).format(row.maximum / row.minimum) + "×)"
+      );
     },
     formatDate(value) {
       return new Intl.DateTimeFormat(this.locale + "-u-ca-persian", {
