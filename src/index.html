@@ -223,6 +223,7 @@
                       type="text"
                       dir="ltr"
                       inputmode="numeric"
+                      min="1"
                       :value="formatPrice(dollarAmount)"
                       @input="updateAmount($event.target.value)"
                       @blur="$event.target.value = formatPrice(dollarAmount)"
@@ -252,12 +253,12 @@
               >
                 <td
                   dir="ltr"
-                  class="px-2 py-2 text-center text-sm sm:text-base font-medium tabular-nums sm:px-4 sm:py-2.5"
+                  class="px-2 py-1.5 text-center text-sm sm:text-base font-medium tabular-nums sm:px-4 sm:py-2"
                 >
                   <bdi dir="ltr" x-text="formatYear(row.year)"></bdi>
                 </td>
                 <td
-                  class="px-2 py-2 text-[10px] leading-4 text-muted sm:px-4 sm:py-2.5 sm:text-sm sm:leading-5"
+                  class="px-2 py-1.5 text-[10px] leading-4 text-muted sm:px-4 sm:py-2 sm:text-sm sm:leading-5"
                 >
                   <div class="government-portraits">
                     <template x-for="person in [primaryPerson(row)]" :key="person.en">
@@ -301,13 +302,13 @@
                 </td>
                 <td
                   dir="ltr"
-                  class="px-2 py-2 text-center font-medium tabular-nums sm:px-4 sm:py-2.5"
+                  class="px-2 py-1.5 text-center font-medium tabular-nums sm:px-4 sm:py-2"
                 >
                   <bdi dir="ltr" x-text="formatPrice(row.minimum)"></bdi>
                 </td>
                 <td
                   dir="ltr"
-                  class="px-2 py-2 text-center text-accent font-medium tabular-nums sm:px-4 sm:py-2.5"
+                  class="px-2 py-1.5 text-center text-accent font-medium tabular-nums sm:px-4 sm:py-2"
                 >
                   <bdi dir="ltr" x-text="formatPrice(row.maximum)"></bdi>
                   <span
@@ -322,13 +323,13 @@
                 </td>
                 <td
                   dir="ltr"
-                  class="hidden px-0.5 py-2 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
+                  class="hidden px-0.5 py-1.5 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
                 >
                   <bdi dir="ltr" x-text="tomanValue(row.minimum)"></bdi>
                 </td>
                 <td
                   dir="ltr"
-                  class="hidden px-0.5 py-2 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
+                  class="hidden px-0.5 py-1.5 text-center font-medium tabular-nums sm:table-cell sm:text-xs"
                 >
                   <bdi dir="ltr" x-text="tomanValue(row.maximum)"></bdi>
                 </td></tr
@@ -413,12 +414,24 @@
           </template>
         </div>
       </dialog>
-      <dialog x-ref="creditsDialog" class="modal-dialog w-[calc(100%-24px)] max-w-lg rounded-2xl border border-line bg-surface text-ink shadow-xl" aria-labelledby="credits-title" @click.self="$refs.creditsDialog.close()">
+      <dialog x-ref="creditsDialog" class="modal-dialog w-[calc(100%-24px)] max-w-lg rounded-2xl border border-line bg-surface text-ink shadow-xl" aria-labelledby="credits-title" @click.self="$refs.creditsDialog.close()" @close="$el.querySelectorAll('details').forEach(section => section.open = false)">
         <div class="p-4 sm:p-6" :dir="lang==='fa'?'rtl':'ltr'">
           <header class="flex items-center justify-between gap-4">
-            <h2 id="credits-title" class="text-lg font-semibold" x-text="t.imageSources"></h2>
+            <h2 id="credits-title" class="text-lg font-semibold" x-text="t.sourcesUsed"></h2>
             <button type="button" class="icon-button" @click="$refs.creditsDialog.close()" :aria-label="t.close" autofocus>✕</button>
           </header>
+          <details class="mt-4">
+            <summary class="cursor-pointer text-sm font-medium text-accent" x-text="t.priceSources"></summary>
+            <ul class="mt-2 space-y-2">
+              <template x-for="source in data ? Object.values(data.sources) : []" :key="source.url"><li><a class="source-link text-xs" :href="source.url" target="_blank" rel="noopener" x-text="source.name"></a></li></template>
+            </ul>
+          </details>
+          <details class="mt-4 border-t border-line pt-3">
+            <summary class="cursor-pointer text-sm font-medium text-accent" x-text="t.governmentSources"></summary>
+            <ul class="mt-2 space-y-2"><template x-for="url in governmentSources" :key="url"><li><a class="source-link block break-words text-xs" :href="url" target="_blank" rel="noopener" x-text="decodeURIComponent(new URL(url).pathname.split('/').filter(Boolean).at(-1)).replaceAll('_',' ')"></a></li></template></ul>
+          </details>
+          <details class="mt-4 border-t border-line pt-3">
+            <summary class="cursor-pointer text-sm font-medium text-accent" x-text="t.imageSources"></summary>
           <p class="mt-3 text-xs leading-6 text-muted" x-text="t.imageNote"></p>
           <ul class="mt-4 divide-y divide-line">
             <template x-for="credit in portraitCredits" :key="credit.en">
@@ -428,46 +441,17 @@
               </li>
             </template>
           </ul>
+          </details>
         </div>
       </dialog>
-      <footer
-        class="mt-4 flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-3 text-[11px] text-muted"
-      >
-        <button type="button" class="source-link" @click="$refs.creditsDialog.showModal()" aria-haspopup="dialog" x-text="t.imageSources">منبع تصاویر</button>
-        <span x-text="t.source"></span
-        ><a
-          class="source-link"
-          href="https://www.tgju.org/profile/price_dollar_rl/history"
-          target="_blank"
-          rel="noopener"
-          >TGJU ↗</a
-        ><span>·</span
-        ><a
-          class="source-link"
-          href="https://netarz.ir/wiki/dollar-price-by-year"
-          target="_blank"
-          rel="noopener"
-          >NetArz ↗</a
-        ><span>·</span
-        ><a
-          class="source-link"
-          href="https://www.khabaronline.ir/news/189536"
-          target="_blank"
-          rel="noopener"
-          >KhabarOnline ↗</a
-        >
-        <p class="mt-1 flex w-full flex-wrap items-center justify-center gap-1 text-[10px]">
+      <footer class="mt-4 flex shrink-0 items-center justify-between gap-3 border-t border-line pt-3 text-[10px] text-muted" dir="ltr">
+        <p class="flex min-w-0 flex-wrap items-center gap-1" :dir="lang==='fa'?'rtl':'ltr'">
           <span class="text-[11px] leading-none" aria-hidden="true">❤️</span>
           <span x-text="t.createdWith">ساخته شده با علاقه و درد توسط</span>
-          <a
-          class="source-link"
-          href="https://github.com/ohmydevops/USDTOMAN"
-          target="_blank"
-          rel="noopener"
-          >ohmydevops</a
-        >
+          <a class="source-link" href="https://github.com/ohmydevops/USDTOMAN" target="_blank" rel="noopener">ohmydevops</a>
           <span x-text="t.createdWhen">در یک بعدازظهر مهر ۱۴۰۵</span>
         </p>
+        <button type="button" class="source-link shrink-0 py-1" @click="$refs.creditsDialog.showModal()" aria-haspopup="dialog" x-text="t.sourcesUsed">منابع استفاده شده</button>
       </footer>
     </main>
   </body>

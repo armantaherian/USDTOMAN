@@ -56,6 +56,18 @@ test("data age uses Tehran calendar days and localized digits", () => {
   assert.equal(app.daysAgo("2026-10-10", new Date("2026-10-10T12:00:00Z")), "0 days ago");
 });
 
+test("dollar input has a minimum of one with English and Persian digits", () => {
+  const { app } = createApp();
+  app.updateAmount("0");
+  assert.equal(app.dollarAmount, 1);
+  app.updateAmount("۰");
+  assert.equal(app.dollarAmount, 1);
+  app.updateAmount("");
+  assert.equal(app.dollarAmount, 1);
+  app.updateAmount("۲۵");
+  assert.equal(app.dollarAmount, 25);
+});
+
 test("formatting repeated prices reuses formatters while supporting language changes", () => {
   let created = 0;
   const { app } = createApp({}, {
@@ -124,6 +136,12 @@ test("translations have matching Persian and English text", () => {
   app.toggleLanguage();
   assert.deepEqual(Object.keys(app.t).sort(), Object.keys(persian).sort());
   for (const text of Object.values(app.t)) assert.ok(text.length);
+});
+
+test("source modal includes unique government and leadership references", () => {
+  const { app } = createApp();
+  assert.ok(app.governmentSources.includes("https://www.archontology.org/nations/iran/00_1979_td_pr.php"));
+  assert.equal(new Set(app.governmentSources).size, app.governmentSources.length);
 });
 
 test("compiled app runs as a classic script and registers the Alpine component", async () => {

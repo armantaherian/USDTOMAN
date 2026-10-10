@@ -32,7 +32,10 @@ const translations = {
     cabinet: "هیئت دولت",
     officeholdersNote: "افرادی که در بخشی از این سال خدمت کرده‌اند. نام‌های متعدد نشان‌دهنده تغییر مسئول هستند؛ همه هم‌زمان در سمت نبوده‌اند.",
     historicalSource: "منبع",
-    imageSources: "منبع تصاویر",
+    imageSources: "منابع تصاویر",
+    priceSources: "منابع قیمت‌ها",
+    governmentSources: "منابع هیئت دولت",
+    sourcesUsed: "منابع استفاده شده",
     imageNote: "پرتره‌ها با هوش مصنوعی و بر اساس عکس‌های ویکی‌مدیا کامانز بازطراحی شده‌اند. منابع عکس‌های اصلی:",
     publicDomain: "مالکیت عمومی",
     unknownAuthor: "پدیدآورنده نامشخص",
@@ -74,7 +77,10 @@ const translations = {
     cabinet: "Cabinet",
     officeholdersNote: "People who served during part of this year. Multiple names indicate changes in office; they did not all serve simultaneously.",
     historicalSource: "Source",
-    imageSources: "Portrait sources",
+    imageSources: "Image sources",
+    priceSources: "Price sources",
+    governmentSources: "Cabinet sources",
+    sourcesUsed: "Sources used",
     imageNote: "AI-generated illustrated portraits based on Wikimedia Commons photographs. Original photo sources:",
     publicDomain: "Public domain",
     unknownAuthor: "Unknown author",
@@ -221,6 +227,15 @@ document.addEventListener("alpine:init", () =>
         fa: this.data?.years.flatMap(row => row.government).find(person => person.en === en)?.fa || en,
       }));
     },
+    get governmentSources() {
+      return [...new Set([
+        ...governmentData.records.map(person => person.source),
+        leadership.termSource,
+        ...leadership.terms.map(person => person.source),
+        ...Object.values(leadership.events).flatMap(event => [event.source, event.electionSource]),
+        this.data?.governmentSource?.url,
+      ].filter(Boolean))];
+    },
     get governmentTree() {
       if (this.governmentYear === null) return [];
       return governmentForYear(this.governmentYear, governmentData.records).map(node => ({
@@ -321,7 +336,8 @@ document.addEventListener("alpine:init", () =>
         .replace(/[۰-۹]/g, (digit) => "۰۱۲۳۴۵۶۷۸۹".indexOf(digit))
         .replace(/[٠-٩]/g, (digit) => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
         .replace(/[,٬\s]/g, "");
-      if (/^\d*$/.test(normalized)) this.dollarAmount = Number(normalized);
+      if (/^\d*$/.test(normalized) && Number.isFinite(Number(normalized)))
+        this.dollarAmount = Math.max(1, Number(normalized));
     },
     formatPrice(value) {
       return value === null
