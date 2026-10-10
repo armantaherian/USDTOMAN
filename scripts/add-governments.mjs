@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+const names={bazargan:{fa:'مهدی بازرگان (دولت موقت)',en:'Mehdi Bazargan (interim)'},banisadr:{fa:'ابوالحسن بنی‌صدر',en:'Abolhassan Banisadr'},rajai:{fa:'محمدعلی رجایی',en:'Mohammad-Ali Rajai'},khamenei:{fa:'علی خامنه‌ای',en:'Ali Khamenei'},rafsanjani:{fa:'اکبر هاشمی رفسنجانی',en:'Akbar Hashemi Rafsanjani'},khatami:{fa:'محمد خاتمی',en:'Mohammad Khatami'},ahmadinejad:{fa:'محمود احمدی‌نژاد',en:'Mahmoud Ahmadinejad'},rouhani:{fa:'حسن روحانی',en:'Hassan Rouhani'},raisi:{fa:'ابراهیم رئیسی',en:'Ebrahim Raisi'},mokhber:{fa:'محمد مخبر (سرپرست)',en:'Mohammad Mokhber (acting)'},pezeshkian:{fa:'مسعود پزشکیان',en:'Masoud Pezeshkian'}};
+function government(year){
+ if(year===1357)return ['bazargan'];
+ if(year===1358)return ['bazargan','banisadr'];
+ if(year===1359)return ['banisadr'];
+ if(year===1360)return ['banisadr','rajai','khamenei'];
+ if(year<1368)return ['khamenei'];
+ if(year===1368)return ['khamenei','rafsanjani'];
+ if(year<1376)return ['rafsanjani'];
+ if(year===1376)return ['rafsanjani','khatami'];
+ if(year<1384)return ['khatami'];
+ if(year===1384)return ['khatami','ahmadinejad'];
+ if(year<1392)return ['ahmadinejad'];
+ if(year===1392)return ['ahmadinejad','rouhani'];
+ if(year<1400)return ['rouhani'];
+ if(year===1400)return ['rouhani','raisi'];
+ if(year<1403)return ['raisi'];
+ if(year===1403)return ['raisi','mokhber','pezeshkian'];
+ return ['pezeshkian'];
+}
+const file='dist/data.json',data=JSON.parse(fs.readFileSync(file,'utf8'));
+for(const row of data.years)row.government=government(row.year).map(id=>names[id]);
+data.governmentSource={url:'https://en.wikipedia.org/wiki/List_of_presidents_of_Iran',method:'Presidents who served during each Persian calendar year, in chronological order. Bazargan is shown as interim prime minister before the presidency existed; Mokhber is labeled acting. Temporary presidential councils and pre-revolution prime ministers are omitted.'};
+fs.writeFileSync(file,JSON.stringify(data,null,2)+'\n');
+let html=fs.readFileSync('dist/index.html','utf8').replace('<th id="yearHeading" scope="col"></th>','<th id="yearHeading" scope="col"></th><th id="governmentHeading" scope="col"></th>');
+fs.writeFileSync('dist/index.html',html);
+let js=fs.readFileSync('dist/app.js','utf8').replace("function render(){const t=copy[lang];", "function render(){const t=copy[lang];$('governmentHeading').textContent=lang==='fa'?'دولت':'Government';");
+js=js.replace("[row.year,row.minimum,row.maximum].entries()","[row.year,row.government,row.minimum,row.maximum].entries()");
+js=js.replace("td.textContent=value===null?'—':index===0?", "if(index===1){td.className='government';for(const person of value){const name=document.createElement('span');name.textContent=person[lang];td.append(name)}}else td.textContent=value===null?'—':index===0?");
+fs.writeFileSync('dist/app.js',js);

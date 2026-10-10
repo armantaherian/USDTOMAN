@@ -13,7 +13,13 @@
       "observations": 1,
       "source": "khabaronline",
       "resolution": "annual-reference-repeated",
-      "referencePrice": 10
+      "referencePrice": 10,
+      "government": [
+        {
+          "fa": "مهدی بازرگان (دولت موقت)",
+          "en": "Mehdi Bazargan (interim)"
+        }
+      ]
     },
     {
       "year": 1358,
@@ -22,7 +28,17 @@
       "observations": 1,
       "source": "khabaronline",
       "resolution": "annual-reference-repeated",
-      "referencePrice": 14
+      "referencePrice": 14,
+      "government": [
+        {
+          "fa": "مهدی بازرگان (دولت موقت)",
+          "en": "Mehdi Bazargan (interim)"
+        },
+        {
+          "fa": "ابوالحسن بنی‌صدر",
+          "en": "Abolhassan Banisadr"
+        }
+      ]
     },
     {
       "year": 1359,
@@ -31,7 +47,13 @@
       "observations": 1,
       "source": "khabaronline",
       "resolution": "annual-reference-repeated",
-      "referencePrice": 20
+      "referencePrice": 20,
+      "government": [
+        {
+          "fa": "ابوالحسن بنی‌صدر",
+          "en": "Abolhassan Banisadr"
+        }
+      ]
     },
     {
       "year": 1360,
@@ -40,7 +62,21 @@
       "observations": 1,
       "source": "khabaronline",
       "resolution": "annual-reference-repeated",
-      "referencePrice": 27
+      "referencePrice": 27,
+      "government": [
+        {
+          "fa": "ابوالحسن بنی‌صدر",
+          "en": "Abolhassan Banisadr"
+        },
+        {
+          "fa": "محمدعلی رجایی",
+          "en": "Mohammad-Ali Rajai"
+        },
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        }
+      ]
     },
     {
       "year": 1361,
@@ -49,7 +85,13 @@
       "observations": 1,
       "source": "khabaronline",
       "resolution": "annual-reference-repeated",
-      "referencePrice": 35
+      "referencePrice": 35,
+      "government": [
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        }
+      ]
     },
     {
       "year": 1362,
@@ -58,7 +100,13 @@
       "observations": 1,
       "source": "khabaronline",
       "resolution": "annual-reference-repeated",
-      "referencePrice": 45
+      "referencePrice": 45,
+      "government": [
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        }
+      ]
     },
     {
       "year": 1363,
@@ -67,196 +115,376 @@
       "observations": 1,
       "source": "khabaronline",
       "resolution": "annual-reference-repeated",
-      "referencePrice": 58
+      "referencePrice": 58,
+      "government": [
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        }
+      ]
     },
     {
       "year": 1364,
       "minimum": 60,
       "maximum": 65,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        }
+      ]
     },
     {
       "year": 1365,
       "minimum": 62,
       "maximum": 86,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        }
+      ]
     },
     {
       "year": 1366,
       "minimum": 83,
       "maximum": 114,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        }
+      ]
     },
     {
       "year": 1367,
       "minimum": 65,
       "maximum": 134,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        }
+      ]
     },
     {
       "year": 1368,
       "minimum": 107,
       "maximum": 134,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "علی خامنه‌ای",
+          "en": "Ali Khamenei"
+        },
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        }
+      ]
     },
     {
       "year": 1369,
       "minimum": 132,
       "maximum": 146,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        }
+      ]
     },
     {
       "year": 1370,
       "minimum": 137,
       "maximum": 146,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        }
+      ]
     },
     {
       "year": 1371,
       "minimum": 144,
       "maximum": 161,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        }
+      ]
     },
     {
       "year": 1372,
       "minimum": 160,
       "maximum": 245,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        }
+      ]
     },
     {
       "year": 1373,
       "minimum": 237,
       "maximum": 352,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        }
+      ]
     },
     {
       "year": 1374,
       "minimum": 358,
       "maximum": 512,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        }
+      ]
     },
     {
       "year": 1375,
       "minimum": 418,
       "maximum": 484,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        }
+      ]
     },
     {
       "year": 1376,
       "minimum": 462,
       "maximum": 509,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "اکبر هاشمی رفسنجانی",
+          "en": "Akbar Hashemi Rafsanjani"
+        },
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        }
+      ]
     },
     {
       "year": 1377,
       "minimum": 542,
       "maximum": 823,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        }
+      ]
     },
     {
       "year": 1378,
       "minimum": 806,
       "maximum": 914,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        }
+      ]
     },
     {
       "year": 1379,
       "minimum": 799,
       "maximum": 851,
       "source": "netarz",
-      "resolution": "monthly-average"
+      "resolution": "monthly-average",
+      "government": [
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        }
+      ]
     },
     {
       "year": 1380,
       "minimum": 799,
       "maximum": 804,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        }
+      ]
     },
     {
       "year": 1381,
       "minimum": 799,
       "maximum": 811,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        }
+      ]
     },
     {
       "year": 1382,
       "minimum": 818,
       "maximum": 844,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        }
+      ]
     },
     {
       "year": 1383,
       "minimum": 854,
       "maximum": 889,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        }
+      ]
     },
     {
       "year": 1384,
       "minimum": 891,
       "maximum": 915,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمد خاتمی",
+          "en": "Mohammad Khatami"
+        },
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        }
+      ]
     },
     {
       "year": 1385,
       "minimum": 916,
       "maximum": 931,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        }
+      ]
     },
     {
       "year": 1386,
       "minimum": 930,
       "maximum": 943,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        }
+      ]
     },
     {
       "year": 1387,
       "minimum": 919,
       "maximum": 1036,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        }
+      ]
     },
     {
       "year": 1388,
       "minimum": 967,
       "maximum": 1020,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        }
+      ]
     },
     {
       "year": 1389,
       "minimum": 1000,
       "maximum": 1140,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        }
+      ]
     },
     {
       "year": 1390,
       "minimum": 1110,
       "maximum": 1970,
       "source": "netarz",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        }
+      ]
     },
     {
       "year": 1391,
@@ -264,7 +492,13 @@
       "maximum": 3890,
       "observations": 244,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        }
+      ]
     },
     {
       "year": 1392,
@@ -272,7 +506,17 @@
       "maximum": 3690,
       "observations": 246,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "محمود احمدی‌نژاد",
+          "en": "Mahmoud Ahmadinejad"
+        },
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        }
+      ]
     },
     {
       "year": 1393,
@@ -280,7 +524,13 @@
       "maximum": 3574,
       "observations": 282,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        }
+      ]
     },
     {
       "year": 1394,
@@ -288,7 +538,13 @@
       "maximum": 3721,
       "observations": 243,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        }
+      ]
     },
     {
       "year": 1395,
@@ -296,7 +552,13 @@
       "maximum": 4123,
       "observations": 240,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        }
+      ]
     },
     {
       "year": 1396,
@@ -304,7 +566,13 @@
       "maximum": 4913,
       "observations": 242,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        }
+      ]
     },
     {
       "year": 1397,
@@ -312,7 +580,13 @@
       "maximum": 19354,
       "observations": 280,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        }
+      ]
     },
     {
       "year": 1398,
@@ -320,7 +594,13 @@
       "maximum": 16120,
       "observations": 283,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        }
+      ]
     },
     {
       "year": 1399,
@@ -328,7 +608,13 @@
       "maximum": 32184,
       "observations": 284,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        }
+      ]
     },
     {
       "year": 1400,
@@ -336,7 +622,17 @@
       "maximum": 31060,
       "observations": 283,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "حسن روحانی",
+          "en": "Hassan Rouhani"
+        },
+        {
+          "fa": "ابراهیم رئیسی",
+          "en": "Ebrahim Raisi"
+        }
+      ]
     },
     {
       "year": 1401,
@@ -344,7 +640,13 @@
       "maximum": 60060,
       "observations": 259,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "ابراهیم رئیسی",
+          "en": "Ebrahim Raisi"
+        }
+      ]
     },
     {
       "year": 1402,
@@ -352,7 +654,13 @@
       "maximum": 62098.8,
       "observations": 283,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "ابراهیم رئیسی",
+          "en": "Ebrahim Raisi"
+        }
+      ]
     },
     {
       "year": 1403,
@@ -360,7 +668,21 @@
       "maximum": 98220,
       "observations": 288,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "ابراهیم رئیسی",
+          "en": "Ebrahim Raisi"
+        },
+        {
+          "fa": "محمد مخبر (سرپرست)",
+          "en": "Mohammad Mokhber (acting)"
+        },
+        {
+          "fa": "مسعود پزشکیان",
+          "en": "Masoud Pezeshkian"
+        }
+      ]
     },
     {
       "year": 1404,
@@ -368,7 +690,13 @@
       "maximum": 166370,
       "observations": 281,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "مسعود پزشکیان",
+          "en": "Masoud Pezeshkian"
+        }
+      ]
     },
     {
       "year": 1405,
@@ -376,7 +704,13 @@
       "maximum": 272020,
       "observations": 162,
       "source": "tgju",
-      "resolution": "daily"
+      "resolution": "daily",
+      "government": [
+        {
+          "fa": "مسعود پزشکیان",
+          "en": "Masoud Pezeshkian"
+        }
+      ]
     }
   ],
   "sources": {
@@ -400,5 +734,9 @@
       "originalUnit": "toman",
       "articleDate": "1390/09/24"
     }
+  },
+  "governmentSource": {
+    "url": "https://en.wikipedia.org/wiki/List_of_presidents_of_Iran",
+    "method": "Presidents who served during each Persian calendar year, in chronological order. Bazargan is shown as interim prime minister before the presidency existed; Mokhber is labeled acting. Temporary presidential councils and pre-revolution prime ministers are omitted."
   }
 }
