@@ -5,6 +5,7 @@ import sharp from "sharp";
 
 // Keep editable source separate from the files served to visitors.
 fs.mkdirSync("dist", { recursive: true });
+fs.cpSync("src/assets/fonts", "dist/fonts", { recursive: true });
 const data = JSON.parse(fs.readFileSync("src/data.json", "utf8"));
 const escapeHtml = (value) =>
   String(value).replace(

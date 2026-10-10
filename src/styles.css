@@ -1,4 +1,11 @@
 @import "tailwindcss" source(".");
+@font-face {
+  font-family: Vazirmatn;
+  src: url("fonts/vazirmatn.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 @theme inline {
   --color-page: var(--page);
   --color-surface: var(--surface);
