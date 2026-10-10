@@ -67,8 +67,14 @@
         "inLanguage": ["fa", "en"]
       }
     </script>
-    <link rel="preload" href="fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="style.css" />
+    <link
+      rel="preload"
+      href="fonts/vazirmatn.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="style.css" />
     <script defer src="app.js"></script>
     <script defer src="alpine.min.js"></script>
   </head>
@@ -183,7 +189,13 @@
                 colspan="2"
                 class="w-[24%] px-2 py-2 font-medium sm:px-4"
               >
-                <div class="flex items-center justify-center gap-1 whitespace-nowrap"><span class="text-[8px] sm:text-[10px]" x-text="t.minimum"></span>
+                <div
+                  class="flex items-center justify-center gap-1 whitespace-nowrap"
+                >
+                  <span
+                    class="text-[8px] sm:text-[10px]"
+                    x-text="t.minimum"
+                  ></span>
                   <input
                     id="dollar-amount"
                     type="text"
@@ -195,133 +207,13 @@
                     :aria-label="t.amount"
                     class="min-w-0 w-full max-w-[50px] text-center rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] font-medium text-ink outline-accent sm:text-xs"
                   />
-                  <small
-                    class="text-[9px] font-normal"
-                    x-text="' 
-                  ></small><span class="text-[8px] sm:text-[10px]" x-text="t.maximum"></span>
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <!-- The build inserts JSON-backed rows for initial rendering and crawlers. -->
-          <tbody class="divide-y divide-line" x-init="$el.remove()">
-            <!-- STATIC_TABLE_ROWS -->
-          </tbody>
-          <tbody class="divide-y divide-line">
-            <template x-for="(row, index) in sortedRows" :key="row.year"
-              ><tr
-                class="table-row hover:bg-tint"
-                :style="{'--row-delay': Math.min(index, 18) * 28 + 'ms'}"
-              >
-                <td
-                  dir="ltr"
-                  class="px-2 py-3 text-center font-medium tabular-nums sm:px-4 sm:py-3.5"
-                >
-                  <bdi dir="ltr" x-text="formatYear(row.year)"></bdi>
-                </td>
-                <td
-                  class="px-2 py-3 text-[10px] leading-4 text-muted sm:px-4 sm:py-3.5 sm:text-sm sm:leading-5"
-                  x-data="{ expanded: false }"
-                >
-                  <button
-                    class="block w-full text-start sm:hidden"
-                    :class="expanded?'whitespace-normal break-words':'truncate'"
-                    @click="expanded = !expanded"
-                    :aria-expanded="expanded"
-                    :aria-label="governmentName(row)"
-                    x-text="expanded || governmentName(row).length <= 24 ? governmentName(row) : governmentName(row).slice(0,24) + '…'"
-                  ></button>
-                  <span
-                    class="hidden whitespace-normal break-words sm:block"
-                    x-text="governmentName(row)"
+                  <small class="text-[9px] font-normal">$</small
+                  ><span
+                    class="text-[8px] sm:text-[10px]"
+                    x-text="t.maximum"
                   ></span>
-                </td>
-                <td
-                  dir="ltr"
-                  class="px-2 py-3 text-center font-medium tabular-nums sm:px-4 sm:py-3.5"
-                >
-                  <bdi dir="ltr" x-text="formatPrice(row.minimum)"></bdi>
-                </td>
-                <td
-                  dir="ltr"
-                  class="px-2 py-3 text-center text-accent font-medium tabular-nums sm:px-4 sm:py-3.5"
-                >
-                  <bdi dir="ltr" x-text="formatPrice(row.maximum)"></bdi>
-                </td>
-                <td
-                  dir="ltr"
-                  class="px-0.5 py-3 text-center text-[8px] font-medium tabular-nums sm:text-xs"
-                >
-                  <bdi dir="ltr" x-text="tomanValue(row.minimum)"></bdi>
-                </td>
-                <td
-                  dir="ltr"
-                  class="px-0.5 py-3 text-center text-[8px] font-medium tabular-nums sm:text-xs"
-                >
-                  <bdi dir="ltr" x-text="tomanValue(row.maximum)"></bdi>
-                </td></tr
-            ></template>
-          </tbody>
-        </table>
-        <p
-          role="status"
-          class="px-4 py-5 text-sm text-muted"
-          x-show="loading||error"
-          x-text="error?t.error:t.loading"
-        ></p>
-      </div>
-      <footer
-        class="mt-4 flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-3 text-[11px] text-muted"
-      >
-        <span x-text="t.source"></span
-        ><a
-          class="source-link"
-          href="https://www.tgju.org/profile/price_dollar_rl/history"
-          target="_blank"
-          rel="noopener"
-          >TGJU ↗</a
-        ><span>·</span
-        ><a
-          class="source-link"
-          href="https://netarz.ir/wiki/dollar-price-by-year"
-          target="_blank"
-          rel="noopener"
-          >NetArz / نِت اَرز ↗</a
-        ><span>·</span
-        ><a
-          class="source-link"
-          href="https://www.khabaronline.ir/news/189536"
-          target="_blank"
-          rel="noopener"
-          >KhabarOnline / خبرآنلاین ↗</a
-        >
-        <a
-          class="source-link ms-auto"
-          href="https://github.com/ohmydevops/USDTOMAN"
-          target="_blank"
-          rel="noopener"
-          >GitHub ↗</a
-        >
-      </footer>
-    </main>
-  </body>
-</html>
-"
-                  ></small>
                 </div>
               </th>
-            </tr>
-            <tr>
-              <th
-                scope="col"
-                class="px-1 pb-2 text-center text-[8px] sm:text-xs"
-                x-text="t.minimum + ' (' + t.unit + ')'"
-              ></th>
-              <th
-                scope="col"
-                class="px-1 pb-2 text-center text-[8px] sm:text-xs"
-                x-text="t.maximum + ' (' + t.unit + ')'"
-              ></th>
             </tr>
           </thead>
           <!-- The build inserts JSON-backed rows for initial rendering and crawlers. -->
