@@ -40,6 +40,10 @@ const remember = (key, value) => {
     localStorage.setItem(key, value);
   } catch {}
 };
+const sortParameters = new URLSearchParams(window.location.search);
+const sortableColumns = ["year", "minimum", "maximum"];
+const initialSort = sortParameters.get("sort");
+
 document.addEventListener("alpine:init", () =>
   Alpine.data("dollarTable", () => ({
     lang: preference("language") === "en" ? "en" : "fa",
@@ -47,8 +51,8 @@ document.addEventListener("alpine:init", () =>
     data: null,
     loading: true,
     error: false,
-    sortKey: "year",
-    ascending: false,
+    sortKey: sortableColumns.includes(initialSort) ? initialSort : "year",
+    ascending: sortParameters.get("order") === "asc",
     columns: [
       { key: "year" },
       { key: "government" },
@@ -90,11 +94,16 @@ document.addEventListener("alpine:init", () =>
       this.syncPage();
     },
     sortBy(key) {
+      if (!sortableColumns.includes(key)) return;
       if (this.sortKey === key) this.ascending = !this.ascending;
       else {
         this.sortKey = key;
-        this.ascending = key === "government";
+        this.ascending = false;
       }
+      const url = new URL(window.location.href);
+      url.searchParams.set("sort", this.sortKey);
+      url.searchParams.set("order", this.ascending ? "asc" : "desc");
+      window.history.replaceState(null, "", url);
     },
     get sortedRows() {
       if (!this.data) return [];
