@@ -16,9 +16,9 @@ test('analytics loads only on the published website', () => {
     assert.equal(scripts.length, hostname === 'ohmydevops.github.io' ? 1 : 0);
     if (scripts.length) {
       assert.equal(scripts[0].async, true);
-      assert.ok(scripts[0].src.endsWith('id=G-7TJ3PRZWVX'));
+      assert.ok(scripts[0].src.endsWith('id=G-0FTB3CS77G'));
       assert.equal(window.dataLayer[1][0], 'config');
-      assert.equal(window.dataLayer[1][1], 'G-7TJ3PRZWVX');
+      assert.equal(window.dataLayer[1][1], 'G-0FTB3CS77G');
     }
   }
 });
