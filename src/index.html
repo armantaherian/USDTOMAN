@@ -153,17 +153,18 @@
               <template x-for="column in columns" :key="column.key"
                 ><th
                   scope="col"
-                  :class="column.key==='government'?'w-[26%]':column.key==='year'?'w-[9%]':'w-[15%]'"
+                  rowspan="2"
+                  :class="column.key==='government'?'w-[37%]':column.key==='year'?'w-[9%]':'w-[15%]'"
                   :aria-sort="column.key==='government'?null:sortKey===column.key?(ascending?'ascending':'descending'):'none'"
                 >
                   <span
                     x-show="column.key==='government'"
-                    class="block px-2 py-3 font-medium sm:px-4 sm:py-3.5"
+                    class="block px-2 py-3 text-center font-medium sm:px-4 sm:py-3.5"
                     x-text="t.government"
                   ></span>
                   <button
                     x-show="column.key!=='government'"
-                    class="flex w-full items-center gap-1.5 px-2 py-3 text-start font-medium transition-colors hover:text-ink sm:px-4 sm:py-3.5"
+                    class="flex w-full items-center justify-center gap-1.5 px-2 py-3 text-center font-medium transition-colors hover:text-ink sm:px-4 sm:py-3.5"
                     @click="sortBy(column.key)"
                   >
                     <span
@@ -181,8 +182,12 @@
                     ></span>
                   </button></th
               ></template>
-              <th scope="col" class="w-[35%] px-2 py-2 font-medium sm:px-4">
-                <div class="flex items-center gap-1">
+              <th
+                scope="colgroup"
+                colspan="2"
+                class="w-[24%] px-2 py-2 font-medium sm:px-4"
+              >
+                <div class="flex items-center justify-center gap-1">
                   <input
                     id="dollar-amount"
                     type="text"
@@ -192,18 +197,26 @@
                     @input="updateAmount($event.target.value)"
                     @blur="$event.target.value = formatPrice(dollarAmount)"
                     :aria-label="t.amount"
-                    class="min-w-0 w-full max-w-[110px] rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] font-medium text-ink outline-accent sm:text-xs"
+                    class="min-w-0 w-full max-w-[80px] text-center rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] font-medium text-ink outline-accent sm:text-xs"
                   />
                   <small
                     class="text-[9px] font-normal"
                     x-text="lang === 'fa' ? 'دلار' : 'USD'"
                   ></small>
                 </div>
-                <small
-                  class="mt-1 block text-[8px] font-normal sm:text-[10px]"
-                  x-text="t.minimum + ' | ' + t.maximum + ' (' + t.unit + ')'"
-                ></small>
               </th>
+            </tr>
+            <tr>
+              <th
+                scope="col"
+                class="px-1 pb-2 text-center text-[8px] sm:text-xs"
+                x-text="t.minimum + ' (' + t.unit + ')'"
+              ></th>
+              <th
+                scope="col"
+                class="px-1 pb-2 text-center text-[8px] sm:text-xs"
+                x-text="t.maximum + ' (' + t.unit + ')'"
+              ></th>
             </tr>
           </thead>
           <!-- The build inserts JSON-backed rows for initial rendering and crawlers. -->
@@ -217,7 +230,8 @@
                 :style="{'--row-delay': Math.min(index, 18) * 28 + 'ms'}"
               >
                 <td
-                  class="px-2 py-3 font-medium font-medium tabular-nums sm:px-4 sm:py-3.5"
+                  dir="ltr"
+                  class="px-2 py-3 text-center font-medium tabular-nums sm:px-4 sm:py-3.5"
                 >
                   <bdi dir="ltr" x-text="formatYear(row.year)"></bdi>
                 </td>
@@ -239,32 +253,28 @@
                   ></span>
                 </td>
                 <td
-                  class="px-2 py-3 font-medium tabular-nums sm:px-4 sm:py-3.5"
+                  dir="ltr"
+                  class="px-2 py-3 text-center font-medium tabular-nums sm:px-4 sm:py-3.5"
                 >
                   <bdi dir="ltr" x-text="formatPrice(row.minimum)"></bdi>
                 </td>
                 <td
-                  class="px-2 py-3 text-accent font-medium tabular-nums sm:px-4 sm:py-3.5"
+                  dir="ltr"
+                  class="px-2 py-3 text-center text-accent font-medium tabular-nums sm:px-4 sm:py-3.5"
                 >
                   <bdi dir="ltr" x-text="formatPrice(row.maximum)"></bdi>
                 </td>
                 <td
-                  class="px-2 py-3 text-[10px] font-medium tabular-nums sm:px-4 sm:py-3.5 sm:text-xs"
+                  dir="ltr"
+                  class="px-0.5 py-3 text-center text-[8px] font-medium tabular-nums sm:text-xs"
                 >
-                  <span
-                    dir="ltr"
-                    class="flex items-center justify-between gap-1 whitespace-nowrap text-[8px] sm:text-xs"
-                    :aria-label="t.minimum + ': ' + tomanValue(row.minimum) + ', ' + t.maximum + ': ' + tomanValue(row.maximum) + ' ' + t.unit"
-                    ><span
-                      :title="t.minimum"
-                      x-text="tomanValue(row.minimum)"
-                    ></span
-                    ><span class="text-muted" aria-hidden="true">|</span
-                    ><span
-                      :title="t.maximum"
-                      x-text="tomanValue(row.maximum)"
-                    ></span
-                  ></span>
+                  <bdi dir="ltr" x-text="tomanValue(row.minimum)"></bdi>
+                </td>
+                <td
+                  dir="ltr"
+                  class="px-0.5 py-3 text-center text-[8px] font-medium tabular-nums sm:text-xs"
+                >
+                  <bdi dir="ltr" x-text="tomanValue(row.maximum)"></bdi>
                 </td></tr
             ></template>
           </tbody>
