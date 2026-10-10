@@ -24,7 +24,7 @@ const staticRows = [...data.years]
     const government = row.government.map((person) => person.fa).join("، ");
     const price = (value) =>
       value == null ? "—" : priceFormatter.format(value);
-    return `<tr class="table-row"><td class="font-medium px-2 py-3 sm:px-4">${yearFormatter.format(row.year)}</td><td class="font-medium px-2 py-3 text-muted sm:px-4">${escapeHtml(government)}</td><td class="font-medium px-2 py-3 sm:px-4">${price(row.minimum)}</td><td class="font-medium px-2 py-3 text-accent sm:px-4">${price(row.maximum)}</td><td class="font-medium px-2 py-3 text-xs"><span dir="ltr" class="block whitespace-nowrap text-left">${row.maximum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 2 }).format(1000000 / row.maximum).replace("٫", ".") : "—"} – ${row.minimum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 2 }).format(1000000 / row.minimum).replace("٫", ".") : "—"} $</span></td></tr>`;
+    return `<tr class="table-row"><td class="font-medium px-2 py-3 sm:px-4">${yearFormatter.format(row.year)}</td><td class="font-medium px-2 py-3 text-muted sm:px-4">${escapeHtml(government)}</td><td class="font-medium px-2 py-3 sm:px-4">${price(row.minimum)}</td><td class="font-medium px-2 py-3 text-accent sm:px-4">${price(row.maximum)}</td><td class="font-medium px-2 py-3 text-xs"><span dir="ltr" class="block whitespace-nowrap text-left">${row.maximum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 0 }).format(100 * row.minimum).replace("٫", ".") : "—"} | ${row.minimum > 0 ? new Intl.NumberFormat("fa", { maximumFractionDigits: 0 }).format(100 * row.maximum).replace("٫", ".") : "—"}</span></td></tr>`;
   })
   .join("\n");
 const html = fs

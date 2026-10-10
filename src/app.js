@@ -7,7 +7,7 @@ const translations = {
     maximum: "بیشترین",
     unit: "تومان",
     conversion: "ارزش دلاری",
-    amount: "مبلغ به تومان",
+    amount: "مبلغ به دلار",
     coverage: "آخرین داده:",
     source: "منبع داده:",
     light: "تم روشن",
@@ -23,7 +23,7 @@ const translations = {
     maximum: "Maximum",
     unit: "toman",
     conversion: "Dollar value",
-    amount: "Amount in toman",
+    amount: "Amount in dollars",
     coverage: "Latest observation:",
     source: "Data sources:",
     light: "Light theme",
@@ -55,7 +55,7 @@ document.addEventListener("alpine:init", () =>
     data: null,
     loading: true,
     error: false,
-    tomanAmount: 1000000,
+    dollarAmount: 100,
     sortKey: sortableColumns.includes(initialSort) ? initialSort : "year",
     ascending: sortParameters.get("order") === "asc",
     columns: [
@@ -144,15 +144,15 @@ document.addEventListener("alpine:init", () =>
         value,
       );
     },
-    dollarValue(price) {
-      const amount = Number(this.tomanAmount);
+    tomanValue(price) {
+      const amount = Number(this.dollarAmount);
       if (!Number.isFinite(amount) || amount < 0 || !price || price <= 0)
         return "—";
       return new Intl.NumberFormat("fa-IR", {
         minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
+        maximumFractionDigits: 0,
       })
-        .format(amount / price)
+        .format(amount * price)
         .replace("٫", ".");
     },
     updateAmount(value) {
@@ -160,7 +160,7 @@ document.addEventListener("alpine:init", () =>
         .replace(/[۰-۹]/g, (digit) => "۰۱۲۳۴۵۶۷۸۹".indexOf(digit))
         .replace(/[٠-٩]/g, (digit) => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
         .replace(/[,٬\s]/g, "");
-      if (/^\d*$/.test(normalized)) this.tomanAmount = Number(normalized);
+      if (/^\d*$/.test(normalized)) this.dollarAmount = Number(normalized);
     },
     formatPrice(value) {
       return value === null

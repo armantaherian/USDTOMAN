@@ -153,7 +153,7 @@
               <template x-for="column in columns" :key="column.key"
                 ><th
                   scope="col"
-                  :class="column.key==='government'?'w-[32%]':column.key==='year'?'w-[10%]':'w-[17%]'"
+                  :class="column.key==='government'?'w-[26%]':column.key==='year'?'w-[9%]':'w-[15%]'"
                   :aria-sort="column.key==='government'?null:sortKey===column.key?(ascending?'ascending':'descending'):'none'"
                 >
                   <span
@@ -181,21 +181,28 @@
                     ></span>
                   </button></th
               ></template>
-              <th scope="col" class="w-[24%] px-2 py-2 font-medium sm:px-4">
+              <th scope="col" class="w-[35%] px-2 py-2 font-medium sm:px-4">
                 <div class="flex items-center gap-1">
                   <input
-                    id="toman-amount"
+                    id="dollar-amount"
                     type="text"
                     dir="ltr"
                     inputmode="numeric"
-                    :value="formatPrice(tomanAmount)"
+                    :value="formatPrice(dollarAmount)"
                     @input="updateAmount($event.target.value)"
-                    @blur="$event.target.value = formatPrice(tomanAmount)"
+                    @blur="$event.target.value = formatPrice(dollarAmount)"
                     :aria-label="t.amount"
                     class="min-w-0 w-full max-w-[110px] rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] font-medium text-ink outline-accent sm:text-xs"
                   />
-                  <small class="text-[9px] font-normal" x-text="t.unit"></small>
+                  <small
+                    class="text-[9px] font-normal"
+                    x-text="lang === 'fa' ? 'دلار' : 'USD'"
+                  ></small>
                 </div>
+                <small
+                  class="mt-1 block text-[8px] font-normal sm:text-[10px]"
+                  x-text="t.minimum + ' | ' + t.maximum + ' (' + t.unit + ')'"
+                ></small>
               </th>
             </tr>
           </thead>
@@ -244,8 +251,17 @@
                 >
                   <span
                     dir="ltr"
-                    class="block whitespace-nowrap text-left"
-                    x-text="dollarValue(row.maximum) + ' – ' + dollarValue(row.minimum) + ' $'"
+                    class="flex items-center justify-between gap-1 whitespace-nowrap text-[8px] sm:text-xs"
+                    :aria-label="t.minimum + ': ' + tomanValue(row.minimum) + ', ' + t.maximum + ': ' + tomanValue(row.maximum) + ' ' + t.unit"
+                    ><span
+                      :title="t.minimum"
+                      x-text="tomanValue(row.minimum)"
+                    ></span
+                    ><span class="text-muted" aria-hidden="true">|</span
+                    ><span
+                      :title="t.maximum"
+                      x-text="tomanValue(row.maximum)"
+                    ></span
                   ></span>
                 </td></tr
             ></template>
