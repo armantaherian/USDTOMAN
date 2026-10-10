@@ -60,3 +60,74 @@ html:not([data-theme="dark"]) .icon-button:hover {
 html:not([data-theme="dark"]) th button:hover {
   color: #416186;
 }
+
+/* A short stagger reveals the first screen from top to bottom. */
+@keyframes row-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.table-row {
+  animation: row-enter 420ms ease-out both;
+  animation-delay: var(--row-delay, 0ms);
+}
+body,
+header,
+footer,
+table,
+thead,
+th,
+td,
+.table-row,
+.icon-button,
+.source-link {
+  transition:
+    background-color 250ms ease,
+    color 250ms ease,
+    border-color 250ms ease;
+}
+.icon-button {
+  transition:
+    background-color 250ms ease,
+    color 250ms ease,
+    border-color 250ms ease,
+    transform 180ms ease;
+}
+.icon-button:hover {
+  transform: translateY(-1px);
+}
+.icon-button:active {
+  transform: scale(0.94);
+}
+th button {
+  transition:
+    color 200ms ease,
+    background-color 200ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .table-row {
+    animation: none;
+  }
+  body,
+  header,
+  footer,
+  table,
+  thead,
+  th,
+  td,
+  .table-row,
+  .icon-button,
+  .source-link,
+  th button {
+    transition: none;
+  }
+  .icon-button:hover,
+  .icon-button:active {
+    transform: none;
+  }
+}

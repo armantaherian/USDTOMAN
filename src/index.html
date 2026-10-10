@@ -146,8 +146,11 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-line">
-            <template x-for="row in sortedRows" :key="row.year"
-              ><tr class="transition-colors hover:bg-tint">
+            <template x-for="(row, index) in sortedRows" :key="row.year"
+              ><tr
+                class="table-row hover:bg-tint"
+                :style="{'--row-delay': Math.min(index, 18) * 28 + 'ms'}"
+              >
                 <td
                   class="px-2 py-3 font-medium tabular-nums sm:px-4 sm:py-3.5"
                   x-text="formatYear(row.year)"
@@ -202,6 +205,13 @@
           target="_blank"
           rel="noopener"
           >KhabarOnline / خبرآنلاین ↗</a
+        >
+        <a
+          class="source-link ms-auto"
+          href="https://github.com/ohmydevops/USDTOMAN"
+          target="_blank"
+          rel="noopener"
+          >GitHub ↗</a
         >
       </footer>
     </main>
