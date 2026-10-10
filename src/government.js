@@ -45,15 +45,3 @@ export function primaryGovernmentPerson(row, terms) {
   return row.government.reduce((chosen, person) => duration(person) > duration(chosen) ? person : chosen);
 }
 
-export function organizationNodes(root, groups, lang) {
-  return [
-    { id: "root", parentId: null, ...root },
-    ...groups.map((group, index) => ({
-      id: "role-" + index,
-      parentId: "root",
-      label: group.label,
-      names: group.members.map(person => person[lang]).join(lang === "fa" ? "، " : ", "),
-      members: group.members,
-    })),
-  ];
-}

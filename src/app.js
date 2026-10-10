@@ -1,6 +1,6 @@
 import portraits from "./portraits.json";
 import governmentData from "./government.json";
-import { governmentForYear, primaryGovernmentPerson, organizationNodes } from "./government.js";
+import { governmentForYear, primaryGovernmentPerson } from "./government.js";
 import leadership from "./leadership.json";
 
 const translations = {
@@ -40,10 +40,7 @@ const translations = {
     primeMinister: "نخست‌وزیر",
     termsAndSources: "دوره مسئولیت و منابع",
     otherLeaders: "دیگر مسئولان این سال",
-    zoomIn: "بزرگ‌نمایی",
-    zoomOut: "کوچک‌نمایی",
-    fitChart: "نمایش کامل",
-    chartHint: "برای دیدن دوره مسئولیت و منابع، روی هر کادر بزنید.",
+    personHint: "برای دیدن جزئیات، روی نام هر فرد بزنید.",
   },
   en: {
     title: "Yearly dollar prices in Iran",
@@ -81,10 +78,7 @@ const translations = {
     primeMinister: "Prime Minister",
     termsAndSources: "Terms and sources",
     otherLeaders: "Other leaders this year",
-    zoomIn: "Zoom in",
-    zoomOut: "Zoom out",
-    fitChart: "Fit chart",
-    chartHint: "Select a box to see terms and sources.",
+    personHint: "Select a name to view their details.",
   },
 };
 const preference = (key) => {
@@ -112,7 +106,7 @@ document.addEventListener("alpine:init", () =>
     error: false,
     dollarAmount: 100,
     governmentYear: null,
-    selectedGovernmentNode: null,
+    selectedGovernmentPerson: null,
     sortKey: sortableColumns.includes(initialSort) ? initialSort : "year",
     ascending: sortParameters.get("order") === "asc",
     columns: [
@@ -235,30 +229,21 @@ document.addEventListener("alpine:init", () =>
       const row = this.data?.years.find(row => row.year === this.governmentYear);
       return row ? this.primaryPerson(row) : null;
     },
+    selectGovernmentPerson(person) {
+      this.selectedGovernmentPerson = { ...person };
+    },
+    get selectedPersonRole() {
+      const role = this.selectedGovernmentPerson?.role;
+      return role ? (this.lang === "fa" ? role : governmentData.roles[role]) : "";
+    },
     showGovernment(row) {
       this.governmentYear = row.year;
-      this.selectedGovernmentNode = null;
+      const primary = this.primaryPerson(row);
+      const leaders = this.governmentLeaders.flatMap(node => node.members);
+      const normalize = name => name.replace(/ \(.+\)/, "");
+      const person = leaders.find(person => normalize(person.en) === normalize(primary.en)) || leaders[0] || this.centralBankTree?.members[0];
+      this.selectedGovernmentPerson = person ? { ...person } : null;
       this.$refs.governmentDialog.showModal();
-      this.$nextTick(() => this.renderGovernmentCharts());
-    },
-    async renderGovernmentCharts() {
-      const { renderOrganizationChart } = await import("./org-chart.js");
-      if (!this.$refs.governmentDialog.open || !this.governmentPrimaryLeader) return;
-      const person = this.governmentPrimaryLeader;
-      const root = {
-        label: person.en.includes("interim") ? this.t.primeMinister : this.t.president,
-        names: person[this.lang],
-        members: this.governmentLeaders.flatMap(node => node.members),
-      };
-      const select = node => { this.selectedGovernmentNode = node; };
-      renderOrganizationChart(this.$refs.cabinetChart, organizationNodes(root, this.governmentMinisters, this.lang), this.lang, select);
-      const bank = this.centralBankTree;
-      const bankGroups = bank ? bank.members.map(person => ({ label: bank.label, members: [person] })) : [];
-      renderOrganizationChart(this.$refs.bankChart, organizationNodes({ label: this.t.centralBank, names: "", members: bank?.members || [] }, bankGroups, this.lang), this.lang, select);
-    },
-    async controlChart(name, action) {
-      const { controlOrganizationChart } = await import("./org-chart.js");
-      controlOrganizationChart(name === "bank" ? this.$refs.bankChart : this.$refs.cabinetChart, action);
     },
     formatTermDate(value) {
       if (this.lang === "fa") return value;

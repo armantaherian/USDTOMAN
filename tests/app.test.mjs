@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 import { build } from "esbuild";
-import { governmentForYear, primaryGovernmentPerson, organizationNodes } from "../src/government.js";
+import { governmentForYear, primaryGovernmentPerson } from "../src/government.js";
 
 function createApp(saved = {}) {
   let factory;
@@ -17,7 +17,6 @@ function createApp(saved = {}) {
     governmentData,
     governmentForYear,
     primaryGovernmentPerson,
-    organizationNodes,
     leadership,
     localStorage: { getItem: (key) => saved[key], setItem: (key, value) => (saved[key] = value) },
     window: { location: { search: "" } },
@@ -58,6 +57,21 @@ test("government tree shows finance transitions and the Central Bank governor fo
   assert.ok(!app.governmentMinisters.some(node => node.role === "رئیس کل بانک مرکزی"));
   assert.equal(app.centralBankTree.members[0].en, "Mohammad Reza Farzin");
   assert.equal(app.formatTermDate("۳۱ مرداد ۱۴۰۳"), "31 Mordad 1403");
+});
+
+test("selecting a person updates their detail panel and localizes the role", () => {
+  const { app } = createApp({ language: "en" });
+  app.governmentYear = 1403;
+  const bank = app.centralBankTree.members[0];
+  app.selectGovernmentPerson(bank);
+  assert.equal(app.selectedGovernmentPerson.en, "Mohammad Reza Farzin");
+  assert.equal(app.selectedPersonRole, "Central Bank Governor");
+  app.toggleLanguage();
+  assert.equal(app.selectedPersonRole, "رئیس کل بانک مرکزی");
+  const finance = app.governmentMinisters.find(node => node.role === "وزیر امور اقتصادی و دارایی").members[0];
+  app.selectGovernmentPerson(finance);
+  assert.equal(app.selectedGovernmentPerson.en, finance.en);
+  assert.equal(app.selectedGovernmentPerson.source, finance.source);
 });
 
 test("theme and language persist and restore page direction", () => {

@@ -260,38 +260,6 @@ html[dir="rtl"] thead th[colspan="2"] {
   background: rgb(16 23 19 / 55%);
   backdrop-filter: blur(3px);
 }
-.org-node {
-  width: 100%;
-  height: 100%;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--ink);
-  font-family: Vazirmatn, Arial, sans-serif;
-  text-align: center;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-.org-node strong {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--accent);
-  font-size: 13px;
-  line-height: 20px;
-}
-.org-node div {
-  font-size: 13px;
-  line-height: 22px;
-}
-.org-root {
-  border-color: var(--accent);
-  background: var(--tint);
-}
-.org-chart .node:focus-visible .org-node {
-  outline: 2px solid var(--accent);
-  outline-offset: -3px;
-}
 .portrait-tooltip {
   position: fixed;
   inset: auto;

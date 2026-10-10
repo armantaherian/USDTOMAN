@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { governmentForYear, primaryGovernmentPerson, organizationNodes } from "../src/government.js";
+import { governmentForYear, primaryGovernmentPerson } from "../src/government.js";
 import fs from "node:fs";
 
 test("government tree includes both officeholders in a transition year", () => {
@@ -52,12 +52,3 @@ test("one portrait represents the leader serving longest during the Persian year
   assert.equal(primaryGovernmentPerson(rows.find(row => row.year === 1402), leaders).en, "Ebrahim Raisi");
 });
 
-test("organization-chart nodes connect all ministries directly to one root", () => {
-  const root = { label: "President", names: "A" };
-  const groups = [{ role: "finance", label: "Finance", members: [{ en: "B" }] }, { role: "health", label: "Health", members: [{ en: "C" }] }];
-  const nodes = organizationNodes(root, groups, "en");
-  assert.equal(nodes[0].parentId, null);
-  assert.equal(nodes.length, 3);
-  assert.ok(nodes.slice(1).every(node => node.parentId === nodes[0].id));
-  assert.equal(nodes[1].names, "B");
-});
