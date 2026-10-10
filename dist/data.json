@@ -4,306 +4,392 @@
   "calendar": "persian",
   "retrievedAt": "2026-10-10",
   "latestDate": "2026-10-08",
-  "source": {
-    "name": "m-ahmadi/dollar",
-    "url": "https://github.com/m-ahmadi/dollar",
-    "dataUrl": "https://m-ahmadi.github.io/dollar/data/dollar.json"
-  },
-  "method": "Minimum and maximum across available open/high/low/close observations. Single-observation years have unknown extrema. Coverage varies by year.",
+  "method": "TGJU daily OHLC extrema for full covered years; NetArz published annual ranges for earlier years. Monthly-average ranges are not daily extremes. Current year is year-to-date. Annual-only extrema are null.",
   "years": [
     {
       "year": 1357,
       "minimum": null,
       "maximum": null,
-      "observations": 1
+      "observations": 1,
+      "source": "legacy",
+      "resolution": "annual-only"
     },
     {
       "year": 1358,
       "minimum": null,
       "maximum": null,
-      "observations": 1
+      "observations": 1,
+      "source": "legacy",
+      "resolution": "annual-only"
     },
     {
       "year": 1359,
       "minimum": null,
       "maximum": null,
-      "observations": 1
+      "observations": 1,
+      "source": "legacy",
+      "resolution": "annual-only"
     },
     {
       "year": 1360,
       "minimum": null,
       "maximum": null,
-      "observations": 1
+      "observations": 1,
+      "source": "legacy",
+      "resolution": "annual-only"
     },
     {
       "year": 1361,
       "minimum": null,
       "maximum": null,
-      "observations": 1
+      "observations": 1,
+      "source": "legacy",
+      "resolution": "annual-only"
     },
     {
       "year": 1362,
       "minimum": null,
       "maximum": null,
-      "observations": 1
+      "observations": 1,
+      "source": "legacy",
+      "resolution": "annual-only"
     },
     {
       "year": 1363,
       "minimum": null,
       "maximum": null,
-      "observations": 1
+      "observations": 1,
+      "source": "legacy",
+      "resolution": "annual-only"
     },
     {
       "year": 1364,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 60,
+      "maximum": 65,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1365,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 62,
+      "maximum": 86,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1366,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 83,
+      "maximum": 114,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1367,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 65,
+      "maximum": 134,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1368,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 107,
+      "maximum": 134,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1369,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 132,
+      "maximum": 146,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1370,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 137,
+      "maximum": 146,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1371,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 144,
+      "maximum": 161,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1372,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 160,
+      "maximum": 245,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1373,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 237,
+      "maximum": 352,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1374,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 358,
+      "maximum": 512,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1375,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 418,
+      "maximum": 484,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1376,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 462,
+      "maximum": 509,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1377,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 542,
+      "maximum": 823,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1378,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 806,
+      "maximum": 914,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1379,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 799,
+      "maximum": 851,
+      "source": "netarz",
+      "resolution": "monthly-average"
     },
     {
       "year": 1380,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 799,
+      "maximum": 804,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1381,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 799,
+      "maximum": 811,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1382,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 818,
+      "maximum": 844,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1383,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 854,
+      "maximum": 889,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1384,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 891,
+      "maximum": 915,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1385,
-      "minimum": null,
-      "maximum": null,
-      "observations": 1
+      "minimum": 916,
+      "maximum": 931,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1386,
-      "minimum": 912,
-      "maximum": 945,
-      "observations": 9
+      "minimum": 930,
+      "maximum": 943,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1387,
-      "minimum": 910,
-      "maximum": 1025,
-      "observations": 111
+      "minimum": 919,
+      "maximum": 1036,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1388,
-      "minimum": 974,
-      "maximum": 1010,
-      "observations": 31
+      "minimum": 967,
+      "maximum": 1020,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1389,
       "minimum": 1000,
-      "maximum": 1250,
-      "observations": 112
+      "maximum": 1140,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1390,
       "minimum": 1110,
-      "maximum": 2100,
-      "observations": 221
+      "maximum": 1970,
+      "source": "netarz",
+      "resolution": "daily"
     },
     {
       "year": 1391,
-      "minimum": 1572.5,
-      "maximum": 3960,
-      "observations": 358
+      "minimum": 1575,
+      "maximum": 3890,
+      "observations": 244,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1392,
       "minimum": 2889,
-      "maximum": 3694.4,
-      "observations": 365
+      "maximum": 3690,
+      "observations": 246,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1393,
       "minimum": 3026,
       "maximum": 3574,
-      "observations": 365
+      "observations": 282,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1394,
-      "minimum": 3167,
+      "minimum": 3178,
       "maximum": 3721,
-      "observations": 365
+      "observations": 243,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1395,
-      "minimum": 3374.5,
-      "maximum": 4126,
-      "observations": 366
+      "minimum": 3402.6,
+      "maximum": 4123,
+      "observations": 240,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1396,
-      "minimum": 3676.3,
+      "minimum": 3727,
       "maximum": 4913,
-      "observations": 365
+      "observations": 242,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1397,
       "minimum": 4330,
       "maximum": 19354,
-      "observations": 365
+      "observations": 280,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1398,
-      "minimum": 10995,
-      "maximum": 16100,
-      "observations": 365
+      "minimum": 11060,
+      "maximum": 16120,
+      "observations": 283,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1399,
-      "minimum": 15259.7,
-      "maximum": 32804.6,
-      "observations": 366
+      "minimum": 14639.4,
+      "maximum": 32184,
+      "observations": 284,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1400,
-      "minimum": 20682,
-      "maximum": 31230,
-      "observations": 365
+      "minimum": 20648,
+      "maximum": 31060,
+      "observations": 283,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1401,
-      "minimum": 26202.5,
-      "maximum": 59263.3,
-      "observations": 365
+      "minimum": 25580,
+      "maximum": 60060,
+      "observations": 259,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1402,
-      "minimum": 46930,
-      "maximum": 61392.9,
-      "observations": 365
+      "minimum": 46880,
+      "maximum": 62098.8,
+      "observations": 283,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1403,
       "minimum": 57140,
       "maximum": 98220,
-      "observations": 363
+      "observations": 288,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1404,
       "minimum": 79440,
       "maximum": 166370,
-      "observations": 281
+      "observations": 281,
+      "source": "tgju",
+      "resolution": "daily"
     },
     {
       "year": 1405,
       "minimum": 146980,
       "maximum": 272020,
-      "observations": 162
+      "observations": 162,
+      "source": "tgju",
+      "resolution": "daily"
     }
-  ]
+  ],
+  "sources": {
+    "tgju": {
+      "name": "TGJU",
+      "url": "https://www.tgju.org/profile/price_dollar_rl/history",
+      "originalUnit": "rial",
+      "conversion": "Divide by 10 to convert rial to toman",
+      "coverage": "1391 onward; 1390 excluded because TGJU begins partway through the year"
+    },
+    "netarz": {
+      "name": "NetArz",
+      "url": "https://netarz.ir/wiki/dollar-price-by-year",
+      "originalUnit": "toman",
+      "coverage": "1364–1390; monthly averages through 1379, daily records from 1380"
+    },
+    "legacy": {
+      "name": "m-ahmadi/dollar",
+      "url": "https://github.com/m-ahmadi/dollar",
+      "coverage": "1357–1363; annual-only observations, extrema unavailable"
+    }
+  }
 }
