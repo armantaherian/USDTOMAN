@@ -140,7 +140,7 @@ document.addEventListener("alpine:init", () =>
       });
     },
     formatYear(value) {
-      return new Intl.NumberFormat(this.locale, { useGrouping: false }).format(
+      return new Intl.NumberFormat("fa-IR", { useGrouping: false }).format(
         value,
       );
     },
@@ -148,10 +148,12 @@ document.addEventListener("alpine:init", () =>
       const amount = Number(this.tomanAmount);
       if (!Number.isFinite(amount) || amount < 0 || !price || price <= 0)
         return "—";
-      return new Intl.NumberFormat(this.locale, {
+      return new Intl.NumberFormat("fa-IR", {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
-      }).format(amount / price);
+      })
+        .format(amount / price)
+        .replace("٫", ".");
     },
     updateAmount(value) {
       const normalized = value
@@ -163,12 +165,13 @@ document.addEventListener("alpine:init", () =>
     formatPrice(value) {
       return value === null
         ? "—"
-        : new Intl.NumberFormat(this.locale, {
+        : new Intl.NumberFormat("fa-IR", {
             maximumFractionDigits: 0,
           }).format(value);
     },
     formatDate(value) {
       return new Intl.DateTimeFormat(this.locale + "-u-ca-persian", {
+        numberingSystem: "arabext",
         year: "numeric",
         month: "long",
         day: "numeric",

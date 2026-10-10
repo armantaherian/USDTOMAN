@@ -192,7 +192,7 @@
                     @input="updateAmount($event.target.value)"
                     @blur="$event.target.value = formatPrice(tomanAmount)"
                     :aria-label="t.amount"
-                    class="min-w-0 w-full max-w-[110px] rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] text-ink outline-accent sm:text-xs"
+                    class="min-w-0 w-full max-w-[110px] rounded border border-line bg-surface px-1.5 py-0.5 text-[10px] font-medium text-ink outline-accent sm:text-xs"
                   />
                   <small class="text-[9px] font-normal" x-text="t.unit"></small>
                 </div>
@@ -210,7 +210,7 @@
                 :style="{'--row-delay': Math.min(index, 18) * 28 + 'ms'}"
               >
                 <td
-                  class="px-2 py-3 font-medium tabular-nums sm:px-4 sm:py-3.5"
+                  class="px-2 py-3 font-medium font-medium tabular-nums sm:px-4 sm:py-3.5"
                 >
                   <span x-text="formatYear(row.year)"></span>
                 </td>
@@ -232,15 +232,15 @@
                   ></span>
                 </td>
                 <td
-                  class="px-2 py-3 tabular-nums sm:px-4 sm:py-3.5"
+                  class="px-2 py-3 font-medium tabular-nums sm:px-4 sm:py-3.5"
                   x-text="formatPrice(row.minimum)"
                 ></td>
                 <td
-                  class="px-2 py-3 text-accent tabular-nums sm:px-4 sm:py-3.5"
+                  class="px-2 py-3 text-accent font-medium tabular-nums sm:px-4 sm:py-3.5"
                   x-text="formatPrice(row.maximum)"
                 ></td>
                 <td
-                  class="px-2 py-3 text-[10px] tabular-nums sm:px-4 sm:py-3.5 sm:text-xs"
+                  class="px-2 py-3 text-[10px] font-medium tabular-nums sm:px-4 sm:py-3.5 sm:text-xs"
                 >
                   <span
                     dir="ltr"
