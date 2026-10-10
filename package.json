@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "update-data": "node scripts/update-data.mjs",
     "build": "node scripts/build.mjs",
     "dev": "npm run build && node scripts/serve.mjs",
     "format": "prettier --write src scripts package.json",

@@ -719,7 +719,8 @@
       "url": "https://www.tgju.org/profile/price_dollar_rl/history",
       "originalUnit": "rial",
       "conversion": "Divide by 10 to convert rial to toman",
-      "coverage": "1391 onward; 1390 excluded because TGJU begins partway through the year"
+      "coverage": "1391 onward; 1390 excluded because TGJU begins partway through the year",
+      "dataUrl": "https://api.tgju.org/v1/market/indicator/summary-table-data/price_dollar_rl?lang=fa&order_col=timestamp&order_dir=asc&start=0&length=20000"
     },
     "netarz": {
       "name": "NetArz",

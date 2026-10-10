@@ -29,6 +29,8 @@ Alpine.js and Tailwind CSS. Edit the readable source in `src/index.html`, `src/a
 
 ## Data
 
+Run `npm run update-data` to refresh the TGJU-backed years, then `npm run build`. The updater converts rial to toman and uses daily lows/highs for annual minimums/maximums. Earlier historical sources are preserved, including 1390 because TGJU begins partway through that year. The website continues to load only its local JSON snapshot.
+
 Prices are a stored snapshot, not a live feed. Sources: [TGJU](https://www.tgju.org/profile/price_dollar_rl/history), [NetArz](https://netarz.ir/wiki/dollar-price-by-year), and [KhabarOnline](https://www.khabaronline.ir/news/189536).
 
 Early annual reference prices are repeated in both minimum and maximum columns. Some older ranges use monthly averages. The JSON records each year's source and resolution.
