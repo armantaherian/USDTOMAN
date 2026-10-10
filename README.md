@@ -19,7 +19,7 @@ npm run dev
 
 Open http://127.0.0.1:4173/. Deploy the `dist/` folder to any static host.
 
-For GitHub Pages, select **Deploy from a branch → main → / (root)**. The root entry page opens the website in `dist/`. No GitHub Actions workflow is needed.
+For GitHub Pages, select **Deploy from a branch → main → / (root)**. The build generates a root `index.html` that displays the website directly and loads assets from `dist/`, keeping the root URL. No GitHub Actions workflow is needed.
 
 ## Built with
 
