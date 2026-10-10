@@ -23,6 +23,8 @@ Open http://127.0.0.1:4173/. Deploy the `dist/` folder to any static host.
 
 Alpine.js and Tailwind CSS. Edit `dist/index.html`, `dist/app.js`, and `src/styles.css`, then run `npm run build`.
 
+`scripts/` contains only the build script and local preview server. Update prices directly in `dist/data.json`; no downloaded source pages or raw data copies are required. `.openai/hosting.json` configures the existing hosted website.
+
 ## Data
 
 Prices are a stored snapshot, not a live feed. Sources: [TGJU](https://www.tgju.org/profile/price_dollar_rl/history), [NetArz](https://netarz.ir/wiki/dollar-price-by-year), and [KhabarOnline](https://www.khabaronline.ir/news/189536).
