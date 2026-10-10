@@ -5,7 +5,32 @@ import sharp from "sharp";
 
 // Keep editable source separate from the files served to visitors.
 fs.mkdirSync("dist", { recursive: true });
-fs.copyFileSync("src/index.html", "dist/index.html");
+const data = JSON.parse(fs.readFileSync("src/data.json", "utf8"));
+const escapeHtml = (value) =>
+  String(value).replace(
+    /[&<>"']/g,
+    (character) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        character
+      ],
+  );
+const priceFormatter = new Intl.NumberFormat("fa", {
+  maximumFractionDigits: 0,
+});
+const yearFormatter = new Intl.NumberFormat("fa", { useGrouping: false });
+const staticRows = [...data.years]
+  .sort((first, second) => second.year - first.year)
+  .map((row) => {
+    const government = row.government.map((person) => person.fa).join("، ");
+    const price = (value) =>
+      value == null ? "—" : priceFormatter.format(value);
+    return `<tr class="table-row"><td class="px-2 py-3 sm:px-4">${yearFormatter.format(row.year)}</td><td class="px-2 py-3 text-muted sm:px-4">${escapeHtml(government)}</td><td class="px-2 py-3 sm:px-4">${price(row.minimum)}</td><td class="px-2 py-3 text-accent sm:px-4">${price(row.maximum)}</td></tr>`;
+  })
+  .join("\n");
+const html = fs
+  .readFileSync("src/index.html", "utf8")
+  .replace("<!-- STATIC_TABLE_ROWS -->", staticRows);
+fs.writeFileSync("dist/index.html", html);
 fs.copyFileSync("src/data.json", "dist/data.json");
 fs.copyFileSync("src/assets/favicon.svg", "dist/favicon.svg");
 fs.copyFileSync("src/robots.txt", "dist/robots.txt");
