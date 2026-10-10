@@ -7,7 +7,7 @@ A simple static website showing yearly US dollar prices in Iran, in toman.
 - Sortable column headers
 - Government names for each year
 - Responsive layout with Vazirmatn font
-- Local JSON data in `dist/data.json`
+- JSON data maintained in `src/data.json`
 
 ## Run locally
 
@@ -23,9 +23,9 @@ For GitHub Pages, select **GitHub Actions** as the publishing source. The includ
 
 ## Built with
 
-Alpine.js and Tailwind CSS. Edit `dist/index.html`, `dist/app.js`, and `src/styles.css`, then run `npm run build`.
+Alpine.js and Tailwind CSS. Edit the readable source in `src/index.html`, `src/app.js`, and `src/styles.css`, then run `npm run build`. The build copies HTML and generates minified JavaScript and CSS in `dist/`. Do not edit generated assets directly.
 
-`scripts/` contains only the build script and local preview server. Update prices directly in `dist/data.json`; no downloaded source pages or raw data copies are required. `.openai/hosting.json` configures the existing hosted website.
+`scripts/` contains only the build script and local preview server. Update prices in `src/data.json`, then rebuild; no downloaded source pages or raw data copies are required. `.openai/hosting.json` configures the existing hosted website.
 
 ## Data
 
