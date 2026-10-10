@@ -1,13 +1,8 @@
 # USD / Toman
 
-A simple static website showing yearly US dollar prices in Iran, in toman.
+Yearly US dollar prices in Iran, with Persian/English, light/dark themes, and cabinet details.
 
-- Persian and English
-- Light and dark themes
-- Sortable column headers
-- Government names for each year
-- Responsive layout with Vazirmatn font
-- JSON data maintained in `src/data.json`
+[Open the website](https://ohmydevops.github.io/USDTOMAN/)
 
 ## Run locally
 
@@ -17,29 +12,12 @@ npm run build
 npm run dev
 ```
 
-Open http://127.0.0.1:4173/. Deploy the `dist/` folder to any static host.
+Open http://127.0.0.1:4173/. Source files are in `src/`; `dist/` is generated. Built with Alpine.js and Tailwind CSS.
 
-For GitHub Pages, select **GitHub Actions** as the publishing source. The included workflow builds and deploys `dist/` directly at `https://ohmydevops.github.io/USDTOMAN/` after every push to `main`.
+## Update and check
 
-## Built with
+- Prices: run `npm run update-data` to refresh the stored TGJU snapshot.
+- Government: edit `src/government.json` and `src/leadership.json`, keeping names and sources consistent.
+- Run `npm test` and `npm run build` after application changes.
 
-Alpine.js and Tailwind CSS. Edit the readable source in `src/index.html`, `src/app.js`, and `src/styles.css`, then run `npm run build`. The build copies HTML and generates minified JavaScript and CSS in `dist/`. Do not edit generated assets directly.
-
-`scripts/` contains only the build script and local preview server. Update prices in `src/data.json`, then rebuild; no downloaded source pages or raw data copies are required. `.openai/hosting.json` configures the existing hosted website.
-
-## Data
-
-Run `npm run update-data` to refresh the TGJU-backed years, then `npm run build`. The updater converts rial to toman and uses daily lows/highs for annual minimums/maximums. Earlier historical sources are preserved, including 1390 because TGJU begins partway through that year. The website continues to load only its local JSON snapshot.
-
-Prices are a stored snapshot, not a live feed. Sources: [TGJU](https://www.tgju.org/profile/price_dollar_rl/history), [NetArz](https://netarz.ir/wiki/dollar-price-by-year), and [KhabarOnline](https://www.khabaronline.ir/news/189536).
-
-Early annual reference prices are repeated in both minimum and maximum columns. Some older ranges use monthly averages. The JSON records each year's source and resolution.
-
-Font: [Vazirmatn](https://github.com/rastikerdar/vazirmatn).
-
-## Offline and installation
-
-The site includes a web app manifest and service worker. After one successful online visit, the interface, font, and data are cached for offline use. Install it using your browser's install option where available. HTTPS or localhost is required.
-
-Published JSON data is checked every minute while the page is visible, on reconnection, and when returning to the page. App updates are checked every five minutes and on reconnection or returning to the page. A new app version reloads automatically. This refreshes the published snapshot; it does not fetch live market prices.
-
+See [AGENTS.md](AGENTS.md) for development and data guidelines. GitHub Actions deploys to GitHub Pages on pushes to `main`.
